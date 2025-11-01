@@ -7,6 +7,7 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
 import appCss from '@/shared/styles/styles.css?url';
+import { FilterProvider } from '../shared/context/filter-context';
 import TanStackQueryDevtools from '../shared/integrations/tanstack-query/devtools';
 
 interface MyRouterContext {
@@ -47,22 +48,24 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				{children}
-				{isDevelopment && (
-					<TanStackDevtools
-						config={{
-							position: 'bottom-right',
-						}}
-						plugins={[
-							{
-								name: 'Tanstack Router',
-								render: <TanStackRouterDevtoolsPanel />,
-							},
-							TanStackQueryDevtools,
-						]}
-					/>
-				)}
-				<Scripts />
+				<FilterProvider>
+					{children}
+					{isDevelopment && (
+						<TanStackDevtools
+							config={{
+								position: 'bottom-right',
+							}}
+							plugins={[
+								{
+									name: 'Tanstack Router',
+									render: <TanStackRouterDevtoolsPanel />,
+								},
+								TanStackQueryDevtools,
+							]}
+						/>
+					)}
+					<Scripts />
+				</FilterProvider>
 			</body>
 		</html>
 	);

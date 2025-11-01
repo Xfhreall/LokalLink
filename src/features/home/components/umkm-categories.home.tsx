@@ -23,7 +23,7 @@ const categories = [
 
 const UMKMCategories = () => {
 	return (
-		<div className="w-full mx-auto px-12 py-8">
+		<div className="w-full mx-auto px-12 py-8 container mx-auto">
 			<h2 className="text-2xl font-bold text-gray-800 mb-6">
 				Beli Kategori UMKM
 			</h2>

@@ -119,22 +119,27 @@ const DealCard: React.FC<DealCardProps> = ({ deal, onFavorite }) => {
 					alt={deal.name}
 					className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
 				/>
-
-				{/* Countdown Timer Badges */}
-				<div className="absolute top-[50%] -translate-y-[50%] left-[50%] -translate-x-[50%] flex gap-1">
-					<Badge className="bg-white text-gray-900 hover:bg-white font-bold px-2.5 py-1.5 rounded-lg shadow-md text-sm">
-						{formatTime(timeLeft.hours)}
-					</Badge>
-					<Badge className="bg-orange-500 text-white hover:bg-orange-500 font-bold px-2.5 py-1.5 rounded-lg shadow-md text-sm">
-						{formatTime(timeLeft.minutes)}
-					</Badge>
-					<Badge className="bg-white text-gray-900 hover:bg-white font-bold px-2.5 py-1.5 rounded-lg shadow-md text-sm">
-						{formatTime(timeLeft.seconds)}
-					</Badge>
-				</div>
 			</div>
 			{/* deskripsi */}
 			<article className="absolute -bottom-[50%] translate-y-[-50%] left-[50%] -right-[50%] translate-x-[-50%] w-[90%] shadow-lg transition-transform duration-300 rounded-3xl">
+				{/* Countdown Timer Badges */}
+				<div className="absolute -top-[30%] items-center left-[50%] -translate-x-[50%] flex gap-1">
+					<Badge className="bg-white  font-bold px-2.5 py-1.5 rounded-sm shadow-md text-sm">
+						<span className="text-amber-700">{formatTime(timeLeft.hours)}</span>
+					</Badge>
+					<span className="text-white font-bold">:</span>
+					<Badge className="bg-white font-bold px-2.5 py-1.5 rounded-sm shadow-md text-sm">
+						<span className="text-amber-700">
+							{formatTime(timeLeft.minutes)}
+						</span>
+					</Badge>
+					<span className="text-white font-bold">:</span>
+					<Badge className="bg-white  font-bold px-2.5 py-1.5 rounded-sm shadow-md text-sm">
+						<span className="text-amber-700">
+							{formatTime(timeLeft.seconds)}
+						</span>
+					</Badge>
+				</div>
 				<div className="px-4 py-3 space-y-1.5 bg-white rounded-3xl">
 					{deal.priceNote && (
 						<p className="text-xs text-gray-500">{deal.priceNote}</p>

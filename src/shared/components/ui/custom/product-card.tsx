@@ -1,6 +1,6 @@
+import { Link } from '@tanstack/react-router';
 import { Image } from '@unpic/react';
 import { BellDot, MapPin, Star } from 'lucide-react';
-import { Badge } from '@/shared/components/ui/shadcn/badge';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import {
 	Card,
@@ -132,20 +132,22 @@ const avail = 'Tersedia';
 const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite }) => {
 	return (
 		<Card
-			className={`overflow-hidden hover:shadow-lg transition-shadow duration-300 p-0 gap-2 group ${product.category === avail ? 'border-tertiary-500' : ''}`}
+			className={`overflow-hidden hover:shadow-lg transition-shadow  duration-300 p-0 gap-2 group ${product.category === avail ? 'border-tertiary-500' : ''}`}
 		>
-			<div
-				className={`relative h-40 overflow-hidden ${product.category === avail ? '' : 'grayscale'}`}
-			>
-				<Image
-					layout="constrained"
-					width={400}
-					height={300}
-					src={product.image}
-					alt={product.name}
-					className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-				/>
-			</div>
+			<Link to="/product/$productId" params={{ productId: product.id }}>
+				<div
+					className={`relative h-40 overflow-hidden ${product.category === avail ? '' : 'grayscale'}`}
+				>
+					<Image
+						layout="constrained"
+						width={400}
+						height={300}
+						src={product.image}
+						alt={product.name}
+						className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+					/>
+				</div>
+			</Link>
 
 			<CardContent className="px-4 space-y-2">
 				<p className="text-sm">{product.category}</p>
@@ -204,17 +206,27 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite }) => {
 };
 
 // Main Demo Component
-export default function ProductGrid() {
+interface ProductGridProps {
+	isFilterVisible?: boolean;
+}
+
+export default function ProductGrid({
+	isFilterVisible = true,
+}: ProductGridProps) {
 	const handleFavorite = (productId: string) => {
 		console.log('Favorited product:', productId);
 		alert(`Added product ${productId} to favorites!`);
 	};
 
+	const gridCols = isFilterVisible ? 'lg:grid-cols-5' : 'lg:grid-cols-6';
+
 	return (
 		<div className="container mx-auto p-6">
 			<h1 className="text-2xl font-bold mb-6">Katalog Produk</h1>
 
-			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+			<div
+				className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${gridCols} gap-4 transition-all duration-300`}
+			>
 				{products.map((product) => (
 					<ProductCard
 						key={product.id}
@@ -226,3 +238,6 @@ export default function ProductGrid() {
 		</div>
 	);
 }
+
+// Export products for use in detail page
+export { products };

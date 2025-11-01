@@ -1,13 +1,15 @@
-import { Link } from '@tanstack/react-router';
-import { Bell, Heart, MapPin, Search } from 'lucide-react';
+import { Link, useLocation } from '@tanstack/react-router';
+import { AnimatePresence, motion } from 'framer-motion';
 import {
-	Breadcrumb,
-	BreadcrumbItem,
-	BreadcrumbLink,
-	BreadcrumbList,
-	BreadcrumbPage,
-	BreadcrumbSeparator,
-} from './ui/shadcn/breadcrumb';
+	Bell,
+	ChevronDown,
+	Heart,
+	MapPin,
+	Search,
+	SlidersHorizontal,
+} from 'lucide-react';
+import { useFilter } from '../context/filter-context';
+import DynamicBreadcrumb from './DynamicBreadcrumb';
 import { Button } from './ui/shadcn/button';
 import {
 	InputGroup,
@@ -16,8 +18,12 @@ import {
 } from './ui/shadcn/input-group';
 
 const Header = () => {
+	const location = useLocation();
+	const { isFilterVisible, toggleFilter } = useFilter();
+	const isHomePage = location.pathname === '/';
+
 	return (
-		<header className="w-full p-4 grid sticky top-0 bg-white shadow-xs z-50 px-12 pt-10">
+		<motion.header className="w-full px-12 p-4 grid sticky top-0 bg-white shadow-xs z-50 pt-10 transition-all duration-300">
 			<nav className="flex items-center justify-between">
 				<Link to="/" className="text-lg font-bold">
 					LokalLink
@@ -65,24 +71,43 @@ const Header = () => {
 				</div>
 			</nav>
 			<div className="flex items-center justify-between mt-4 gap-4">
-				{/* Breadcrumb */}
-				<Breadcrumb>
-					<BreadcrumbList>
-						<BreadcrumbItem>
-							<BreadcrumbLink asChild>
-								<Link to="/">Home</Link>
-							</BreadcrumbLink>
-						</BreadcrumbItem>
-						<BreadcrumbSeparator />
-						<BreadcrumbItem>
-							<BreadcrumbPage>Produk</BreadcrumbPage>
-						</BreadcrumbItem>
-					</BreadcrumbList>
-				</Breadcrumb>
+				{/* Breadcrumb or Filter Toggle */}
+				<AnimatePresence mode="wait">
+					{isHomePage ? (
+						<motion.div
+							key="filter-toggle"
+							initial={{ opacity: 0, x: -20 }}
+							animate={{ opacity: 1, x: 0 }}
+							exit={{ opacity: 0, x: -20 }}
+							transition={{ duration: 0.2 }}
+							className="flex-1 max-w-3xs"
+						>
+							<Button
+								onClick={toggleFilter}
+								className="flex items-center px-8 gap-2 rounded-full w-full justify-between"
+							>
+								Cari semua kategori
+								<ChevronDown
+									className={`${!isFilterVisible ? 'rotate-180' : ''} transition-transform duration-300`}
+								/>
+							</Button>
+						</motion.div>
+					) : (
+						<motion.div
+							key="breadcrumb"
+							initial={{ opacity: 0, x: -20 }}
+							animate={{ opacity: 1, x: 0 }}
+							exit={{ opacity: 0, x: -20 }}
+							transition={{ duration: 0.2 }}
+						>
+							<DynamicBreadcrumb />
+						</motion.div>
+					)}
+				</AnimatePresence>
 
 				{/* Search and Location Inputs */}
-				<div className="flex gap-2 flex-1 max-w-2xl">
-					<InputGroup className="flex-1 border-black">
+				<div className="flex gap-2 flex-1 ml-auto max-w-4xl">
+					<InputGroup className="flex-2 border-black">
 						<InputGroupInput
 							type="text"
 							placeholder="Cari Produk UMKM disini"
@@ -91,8 +116,7 @@ const Header = () => {
 							<Search className="w-4 h-4 text-black" />
 						</InputGroupAddon>
 					</InputGroup>
-
-					<InputGroup className="w-64 border-black">
+					<InputGroup className="flex-1 border-black">
 						<InputGroupAddon>
 							<MapPin className="w-4 h-4 text-black" />
 						</InputGroupAddon>
@@ -141,7 +165,7 @@ const Header = () => {
 					</Button>
 				</div>
 			</div>
-		</header>
+		</motion.header>
 	);
 };
 
