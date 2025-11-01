@@ -1,8 +1,6 @@
 import { useParams } from '@tanstack/react-router';
 import { Image } from '@unpic/react';
 import { Heart, MapPin, Share2, ShoppingCart, Star } from 'lucide-react';
-import Footer from '@/shared/components/Footer';
-import Header from '@/shared/components/Header';
 import { products } from '@/shared/components/ui/custom/product-card';
 import { Badge } from '@/shared/components/ui/shadcn/badge';
 import { Button } from '@/shared/components/ui/shadcn/button';
@@ -16,7 +14,6 @@ const ProductDetail = () => {
 	if (!product) {
 		return (
 			<div className="w-full min-h-screen">
-				<Header />
 				<main className="px-12 py-8">
 					<div className="text-center">
 						<h1 className="text-2xl font-bold mb-4">Produk tidak ditemukan</h1>
@@ -25,14 +22,12 @@ const ProductDetail = () => {
 						</p>
 					</div>
 				</main>
-				<Footer />
 			</div>
 		);
 	}
 
 	return (
 		<div className="w-full min-h-screen">
-			<Header />
 			<main className="px-12 py-8 max-w-7xl mx-auto">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
 					{/* Product Image */}
@@ -165,7 +160,6 @@ const ProductDetail = () => {
 					</CardContent>
 				</Card>
 			</main>
-			<Footer />
 		</div>
 	);
 };
