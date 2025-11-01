@@ -11,7 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpsellingUmkmRouteImport } from './routes/upselling-umkm'
 import { Route as TourUmkmRouteImport } from './routes/tour-umkm'
+import { Route as ProductRouteImport } from './routes/product'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductIndexRouteImport } from './routes/product/index'
+import { Route as ProductReviewRouteImport } from './routes/product/review'
+import { Route as ProductInfoRouteImport } from './routes/product/info'
+import { Route as ProductCartRouteImport } from './routes/product/cart'
 import { Route as ProductProductIdRouteImport } from './routes/product/$productId'
 
 const UpsellingUmkmRoute = UpsellingUmkmRouteImport.update({
@@ -24,54 +29,115 @@ const TourUmkmRoute = TourUmkmRouteImport.update({
   path: '/tour-umkm',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductRoute = ProductRouteImport.update({
+  id: '/product',
+  path: '/product',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductIndexRoute = ProductIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProductRoute,
+} as any)
+const ProductReviewRoute = ProductReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => ProductRoute,
+} as any)
+const ProductInfoRoute = ProductInfoRouteImport.update({
+  id: '/info',
+  path: '/info',
+  getParentRoute: () => ProductRoute,
+} as any)
+const ProductCartRoute = ProductCartRouteImport.update({
+  id: '/cart',
+  path: '/cart',
+  getParentRoute: () => ProductRoute,
+} as any)
 const ProductProductIdRoute = ProductProductIdRouteImport.update({
-  id: '/product/$productId',
-  path: '/product/$productId',
-  getParentRoute: () => rootRouteImport,
+  id: '/$productId',
+  path: '/$productId',
+  getParentRoute: () => ProductRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/product': typeof ProductRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
   '/product/$productId': typeof ProductProductIdRoute
+  '/product/cart': typeof ProductCartRoute
+  '/product/info': typeof ProductInfoRoute
+  '/product/review': typeof ProductReviewRoute
+  '/product/': typeof ProductIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
   '/product/$productId': typeof ProductProductIdRoute
+  '/product/cart': typeof ProductCartRoute
+  '/product/info': typeof ProductInfoRoute
+  '/product/review': typeof ProductReviewRoute
+  '/product': typeof ProductIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/product': typeof ProductRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
   '/product/$productId': typeof ProductProductIdRoute
+  '/product/cart': typeof ProductCartRoute
+  '/product/info': typeof ProductInfoRoute
+  '/product/review': typeof ProductReviewRoute
+  '/product/': typeof ProductIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/tour-umkm' | '/upselling-umkm' | '/product/$productId'
+  fullPaths:
+    | '/'
+    | '/product'
+    | '/tour-umkm'
+    | '/upselling-umkm'
+    | '/product/$productId'
+    | '/product/cart'
+    | '/product/info'
+    | '/product/review'
+    | '/product/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/tour-umkm' | '/upselling-umkm' | '/product/$productId'
-  id:
-    | '__root__'
+  to:
     | '/'
     | '/tour-umkm'
     | '/upselling-umkm'
     | '/product/$productId'
+    | '/product/cart'
+    | '/product/info'
+    | '/product/review'
+    | '/product'
+  id:
+    | '__root__'
+    | '/'
+    | '/product'
+    | '/tour-umkm'
+    | '/upselling-umkm'
+    | '/product/$productId'
+    | '/product/cart'
+    | '/product/info'
+    | '/product/review'
+    | '/product/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ProductRoute: typeof ProductRouteWithChildren
   TourUmkmRoute: typeof TourUmkmRoute
   UpsellingUmkmRoute: typeof UpsellingUmkmRoute
-  ProductProductIdRoute: typeof ProductProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -90,6 +156,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TourUmkmRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product': {
+      id: '/product'
+      path: '/product'
+      fullPath: '/product'
+      preLoaderRoute: typeof ProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -97,21 +170,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/': {
+      id: '/product/'
+      path: '/'
+      fullPath: '/product/'
+      preLoaderRoute: typeof ProductIndexRouteImport
+      parentRoute: typeof ProductRoute
+    }
+    '/product/review': {
+      id: '/product/review'
+      path: '/review'
+      fullPath: '/product/review'
+      preLoaderRoute: typeof ProductReviewRouteImport
+      parentRoute: typeof ProductRoute
+    }
+    '/product/info': {
+      id: '/product/info'
+      path: '/info'
+      fullPath: '/product/info'
+      preLoaderRoute: typeof ProductInfoRouteImport
+      parentRoute: typeof ProductRoute
+    }
+    '/product/cart': {
+      id: '/product/cart'
+      path: '/cart'
+      fullPath: '/product/cart'
+      preLoaderRoute: typeof ProductCartRouteImport
+      parentRoute: typeof ProductRoute
+    }
     '/product/$productId': {
       id: '/product/$productId'
-      path: '/product/$productId'
+      path: '/$productId'
       fullPath: '/product/$productId'
       preLoaderRoute: typeof ProductProductIdRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof ProductRoute
     }
   }
 }
 
+interface ProductRouteChildren {
+  ProductProductIdRoute: typeof ProductProductIdRoute
+  ProductCartRoute: typeof ProductCartRoute
+  ProductInfoRoute: typeof ProductInfoRoute
+  ProductReviewRoute: typeof ProductReviewRoute
+  ProductIndexRoute: typeof ProductIndexRoute
+}
+
+const ProductRouteChildren: ProductRouteChildren = {
+  ProductProductIdRoute: ProductProductIdRoute,
+  ProductCartRoute: ProductCartRoute,
+  ProductInfoRoute: ProductInfoRoute,
+  ProductReviewRoute: ProductReviewRoute,
+  ProductIndexRoute: ProductIndexRoute,
+}
+
+const ProductRouteWithChildren =
+  ProductRoute._addFileChildren(ProductRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ProductRoute: ProductRouteWithChildren,
   TourUmkmRoute: TourUmkmRoute,
   UpsellingUmkmRoute: UpsellingUmkmRoute,
-  ProductProductIdRoute: ProductProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
