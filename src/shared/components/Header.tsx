@@ -1,13 +1,6 @@
 import { Link, useLocation } from '@tanstack/react-router';
 import { AnimatePresence, motion } from 'framer-motion';
-import {
-	Bell,
-	ChevronDown,
-	Heart,
-	MapPin,
-	Search,
-	SlidersHorizontal,
-} from 'lucide-react';
+import { Bell, ChevronDown, Heart, MapPin, Search } from 'lucide-react';
 import { useFilter } from '../context/filter-context';
 import DynamicBreadcrumb from './DynamicBreadcrumb';
 import { Button } from './ui/shadcn/button';
@@ -74,14 +67,7 @@ const Header = () => {
 				{/* Breadcrumb or Filter Toggle */}
 				<AnimatePresence mode="wait">
 					{isHomePage ? (
-						<motion.div
-							key="filter-toggle"
-							initial={{ opacity: 0, x: -20 }}
-							animate={{ opacity: 1, x: 0 }}
-							exit={{ opacity: 0, x: -20 }}
-							transition={{ duration: 0.2 }}
-							className="flex-1 max-w-3xs"
-						>
+						<div key="filter-toggle" className="flex-1 max-w-3xs">
 							<Button
 								onClick={toggleFilter}
 								className="flex items-center px-8 gap-2 rounded-full w-full justify-between"
@@ -91,7 +77,7 @@ const Header = () => {
 									className={`${!isFilterVisible ? 'rotate-180' : ''} transition-transform duration-300`}
 								/>
 							</Button>
-						</motion.div>
+						</div>
 					) : (
 						<motion.div
 							key="breadcrumb"
