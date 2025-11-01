@@ -102,7 +102,7 @@ const products: Product[] = [
 		seller: 'Warung Lumayan 69',
 		rating: 4.8,
 		totalReviews: 5,
-		price: 'Rp 15.000',
+		price: 'Rp 105.000',
 		image:
 			'https://images.unsplash.com/photo-1529563021893-cc83c992d75d?w=400&h=300&fit=crop',
 		location: 'Kampung Kuliner',
@@ -177,7 +177,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite }) => {
 				</div>
 			</CardContent>
 
-			<CardFooter className="p-4 pt-0 flex justify-between items-center">
+			<CardFooter className="p-4 pt-0 flex mt-2 justify-between items-center">
 				<p
 					className={`font-bold text-sm ${product.category === avail ? 'text-primary' : 'text-gray-400'}`}
 				>
@@ -186,8 +186,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onFavorite }) => {
 
 				{product.category === avail ? (
 					<Button
-						className="text-white rounded-2xl px-6"
-						size="sm"
+						className="text-white rounded-full text-xs px-5"
 						onClick={() => onFavorite?.(product.id)}
 					>
 						Favorit
