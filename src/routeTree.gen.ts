@@ -9,38 +9,87 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UpsellingUmkmRouteImport } from './routes/upselling-umkm'
+import { Route as TourUmkmRouteImport } from './routes/tour-umkm'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductProductIdRouteImport } from './routes/product/$productId'
 
+const UpsellingUmkmRoute = UpsellingUmkmRouteImport.update({
+  id: '/upselling-umkm',
+  path: '/upselling-umkm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TourUmkmRoute = TourUmkmRouteImport.update({
+  id: '/tour-umkm',
+  path: '/tour-umkm',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProductProductIdRoute = ProductProductIdRouteImport.update({
+  id: '/product/$productId',
+  path: '/product/$productId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/tour-umkm': typeof TourUmkmRoute
+  '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/product/$productId': typeof ProductProductIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/tour-umkm': typeof TourUmkmRoute
+  '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/product/$productId': typeof ProductProductIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/tour-umkm': typeof TourUmkmRoute
+  '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/product/$productId': typeof ProductProductIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/tour-umkm' | '/upselling-umkm' | '/product/$productId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/tour-umkm' | '/upselling-umkm' | '/product/$productId'
+  id:
+    | '__root__'
+    | '/'
+    | '/tour-umkm'
+    | '/upselling-umkm'
+    | '/product/$productId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  TourUmkmRoute: typeof TourUmkmRoute
+  UpsellingUmkmRoute: typeof UpsellingUmkmRoute
+  ProductProductIdRoute: typeof ProductProductIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/upselling-umkm': {
+      id: '/upselling-umkm'
+      path: '/upselling-umkm'
+      fullPath: '/upselling-umkm'
+      preLoaderRoute: typeof UpsellingUmkmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tour-umkm': {
+      id: '/tour-umkm'
+      path: '/tour-umkm'
+      fullPath: '/tour-umkm'
+      preLoaderRoute: typeof TourUmkmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +97,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/product/$productId': {
+      id: '/product/$productId'
+      path: '/product/$productId'
+      fullPath: '/product/$productId'
+      preLoaderRoute: typeof ProductProductIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  TourUmkmRoute: TourUmkmRoute,
+  UpsellingUmkmRoute: UpsellingUmkmRoute,
+  ProductProductIdRoute: ProductProductIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
