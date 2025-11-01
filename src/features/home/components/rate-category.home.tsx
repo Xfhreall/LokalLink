@@ -1,3 +1,4 @@
+import { Image } from '@unpic/react';
 import {
 	Card,
 	CardContent,
@@ -8,22 +9,26 @@ import { Label } from '@/shared/components/ui/shadcn/label';
 
 const category = [
 	{
+		image: '/icons/filter/top-selling.svg',
 		title: 'Top Selling',
 	},
 	{
+		image: '/icons/filter/trending.svg',
 		title: 'Trending Produk',
 	},
 	{
+		image: '/icons/filter/latest.svg',
 		title: 'Terakhir Ditambah',
 	},
 	{
+		image: '/icons/filter/top-rated.svg',
 		title: 'Top Rated',
 	},
 ];
 
 const RateCategory = () => {
 	return (
-		<Card className="px-5 border-primary w-[248px]">
+		<Card className="max-w-3xs px-5 border-primary">
 			<CardTitle className="font-semibold text-lg pb-2 border-b-2">
 				Kategori
 			</CardTitle>
@@ -35,8 +40,14 @@ const RateCategory = () => {
 							key={index.toString()}
 							className="flex items-center justify-between"
 						>
-							<Label htmlFor={item.title} className="capitalize font-normal">
-								{item.title}
+							<Label htmlFor={item.title} className="flex items-center gap-1">
+								<Image
+									src={item.image}
+									alt={item.title}
+									width={32}
+									height={32}
+								/>
+								<span className="capitalize font-normal">{item.title}</span>
 							</Label>
 							<Checkbox className="border-primary" id={item.title} />
 						</div>

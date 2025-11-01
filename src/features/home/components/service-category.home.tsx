@@ -1,3 +1,4 @@
+import { Image } from '@unpic/react';
 import {
 	Card,
 	CardContent,
@@ -8,18 +9,23 @@ import { Label } from '@/shared/components/ui/shadcn/label';
 
 const category = [
 	{
+		image: '/icons/filter/makanan.svg',
 		title: 'makanan',
 	},
 	{
+		image: '/icons/filter/minuman.svg',
 		title: 'minuman',
 	},
 	{
+		image: '/icons/filter/jasa.svg',
 		title: 'jasa',
 	},
 	{
+		image: '/icons/filter/oleh-oleh.svg',
 		title: 'oleh-oleh',
 	},
 	{
+		image: '/icons/filter/lainnya.svg',
 		title: 'lainnya',
 	},
 ];
@@ -38,8 +44,14 @@ const ServiceCategory = () => {
 							key={index.toString()}
 							className="flex items-center justify-between"
 						>
-							<Label htmlFor={item.title} className="capitalize font-normal">
-								{item.title}
+							<Label htmlFor={item.title} className="flex items-center gap-1">
+								<Image
+									src={item.image}
+									alt={item.title}
+									width={32}
+									height={32}
+								/>
+								<span className="capitalize font-normal">{item.title}</span>
 							</Label>
 							<Checkbox className="border-primary" id={item.title} />
 						</div>
