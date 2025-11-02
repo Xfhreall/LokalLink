@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { Facebook, Instagram, MessageCircle, Youtube } from 'lucide-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
 	InputGroup,
 	InputGroupAddon,
