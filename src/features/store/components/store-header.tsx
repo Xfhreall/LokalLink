@@ -18,7 +18,7 @@ export function StoreHeader({ store }: StoreHeaderProps) {
 	return (
 		<div className="space-y-4">
 			{/* Store Image Banner */}
-			<div className="w-full h-56 rounded-lg overflow-hidden bg-linear-to-r from-green-600 to-green-500 relative">
+			<div className="w-full h-72 rounded-lg overflow-hidden bg-linear-to-r from-green-600 to-green-500 relative">
 				<Image
 					layout="fullWidth"
 					src={store.image}
