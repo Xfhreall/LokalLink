@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpsellingUmkmRouteImport } from './routes/upselling-umkm'
 import { Route as TourUmkmRouteImport } from './routes/tour-umkm'
+import { Route as TokoRouteImport } from './routes/toko'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as TokoIndexRouteImport } from './routes/toko/index'
 import { Route as ProductIndexRouteImport } from './routes/product/index'
+import { Route as TokoStoreIdRouteImport } from './routes/toko/$storeId'
 import { Route as ProductReviewRouteImport } from './routes/product/review'
 import { Route as ProductInfoRouteImport } from './routes/product/info'
 import { Route as ProductCartRouteImport } from './routes/product/cart'
@@ -29,6 +32,11 @@ const TourUmkmRoute = TourUmkmRouteImport.update({
   path: '/tour-umkm',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TokoRoute = TokoRouteImport.update({
+  id: '/toko',
+  path: '/toko',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductRoute = ProductRouteImport.update({
   id: '/product',
   path: '/product',
@@ -39,10 +47,20 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TokoIndexRoute = TokoIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => TokoRoute,
+} as any)
 const ProductIndexRoute = ProductIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ProductRoute,
+} as any)
+const TokoStoreIdRoute = TokoStoreIdRouteImport.update({
+  id: '/$storeId',
+  path: '/$storeId',
+  getParentRoute: () => TokoRoute,
 } as any)
 const ProductReviewRoute = ProductReviewRouteImport.update({
   id: '/review',
@@ -68,13 +86,16 @@ const ProductProductIdRoute = ProductProductIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/product': typeof ProductRouteWithChildren
+  '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
   '/product/review': typeof ProductReviewRoute
+  '/toko/$storeId': typeof TokoStoreIdRoute
   '/product/': typeof ProductIndexRoute
+  '/toko/': typeof TokoIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,32 +105,40 @@ export interface FileRoutesByTo {
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
   '/product/review': typeof ProductReviewRoute
+  '/toko/$storeId': typeof TokoStoreIdRoute
   '/product': typeof ProductIndexRoute
+  '/toko': typeof TokoIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/product': typeof ProductRouteWithChildren
+  '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
   '/product/review': typeof ProductReviewRoute
+  '/toko/$storeId': typeof TokoStoreIdRoute
   '/product/': typeof ProductIndexRoute
+  '/toko/': typeof TokoIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/product'
+    | '/toko'
     | '/tour-umkm'
     | '/upselling-umkm'
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
     | '/product/review'
+    | '/toko/$storeId'
     | '/product/'
+    | '/toko/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -119,23 +148,29 @@ export interface FileRouteTypes {
     | '/product/cart'
     | '/product/info'
     | '/product/review'
+    | '/toko/$storeId'
     | '/product'
+    | '/toko'
   id:
     | '__root__'
     | '/'
     | '/product'
+    | '/toko'
     | '/tour-umkm'
     | '/upselling-umkm'
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
     | '/product/review'
+    | '/toko/$storeId'
     | '/product/'
+    | '/toko/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProductRoute: typeof ProductRouteWithChildren
+  TokoRoute: typeof TokoRouteWithChildren
   TourUmkmRoute: typeof TourUmkmRoute
   UpsellingUmkmRoute: typeof UpsellingUmkmRoute
 }
@@ -156,6 +191,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TourUmkmRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/toko': {
+      id: '/toko'
+      path: '/toko'
+      fullPath: '/toko'
+      preLoaderRoute: typeof TokoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/product': {
       id: '/product'
       path: '/product'
@@ -170,12 +212,26 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/toko/': {
+      id: '/toko/'
+      path: '/'
+      fullPath: '/toko/'
+      preLoaderRoute: typeof TokoIndexRouteImport
+      parentRoute: typeof TokoRoute
+    }
     '/product/': {
       id: '/product/'
       path: '/'
       fullPath: '/product/'
       preLoaderRoute: typeof ProductIndexRouteImport
       parentRoute: typeof ProductRoute
+    }
+    '/toko/$storeId': {
+      id: '/toko/$storeId'
+      path: '/$storeId'
+      fullPath: '/toko/$storeId'
+      preLoaderRoute: typeof TokoStoreIdRouteImport
+      parentRoute: typeof TokoRoute
     }
     '/product/review': {
       id: '/product/review'
@@ -227,9 +283,22 @@ const ProductRouteChildren: ProductRouteChildren = {
 const ProductRouteWithChildren =
   ProductRoute._addFileChildren(ProductRouteChildren)
 
+interface TokoRouteChildren {
+  TokoStoreIdRoute: typeof TokoStoreIdRoute
+  TokoIndexRoute: typeof TokoIndexRoute
+}
+
+const TokoRouteChildren: TokoRouteChildren = {
+  TokoStoreIdRoute: TokoStoreIdRoute,
+  TokoIndexRoute: TokoIndexRoute,
+}
+
+const TokoRouteWithChildren = TokoRoute._addFileChildren(TokoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProductRoute: ProductRouteWithChildren,
+  TokoRoute: TokoRouteWithChildren,
   TourUmkmRoute: TourUmkmRoute,
   UpsellingUmkmRoute: UpsellingUmkmRoute,
 }
