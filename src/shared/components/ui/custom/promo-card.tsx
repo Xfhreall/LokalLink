@@ -5,8 +5,7 @@ import { Badge } from '@/shared/components/ui/shadcn/badge';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import { Card } from '@/shared/components/ui/shadcn/card';
 
-// Type definitions
-interface Deal {
+type Deal = {
 	id: string;
 	name: string;
 	store: string;
@@ -15,10 +14,9 @@ interface Deal {
 	price: string;
 	priceNote?: string;
 	image: string;
-	endTime: number; // timestamp in milliseconds
-}
+	endTime: number;
+};
 
-// Dummy data
 const deals: Deal[] = [
 	{
 		id: '1',
@@ -70,11 +68,10 @@ const deals: Deal[] = [
 	},
 ];
 
-// DealCard Component
-interface DealCardProps {
+type DealCardProps = {
 	deal: Deal;
 	onFavorite?: (dealId: string) => void;
-}
+};
 
 const DealCard: React.FC<DealCardProps> = ({ deal, onFavorite }) => {
 	const [timeLeft, setTimeLeft] = useState({
@@ -185,7 +182,6 @@ const DealCard: React.FC<DealCardProps> = ({ deal, onFavorite }) => {
 	);
 };
 
-// Main Demo Component
 export default function DealsOfTheDay() {
 	const handleFavorite = (dealId: string) => {
 		console.log('Favorited deal:', dealId);
