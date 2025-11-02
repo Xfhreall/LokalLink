@@ -491,8 +491,7 @@ export const stores: Store[] = [
 		address:
 			'Jl. Gajayana No.538, Dinoyo, Kec. Lowokwaru, Kota Malang, Jawa Timur 65144',
 		phone: '6281234567890',
-		image:
-			'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=400&fit=crop',
+		image: '/assets/store/banner-store.png',
 		rating: 4.8,
 		totalReviews: 32,
 		openingHours: '11.00 - 22.00',
