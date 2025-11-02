@@ -1,5 +1,4 @@
 import { Info, Star } from 'lucide-react';
-import { Separator } from '@/shared/components/ui/shadcn/separator';
 import {
 	Tabs,
 	TabsContent,
