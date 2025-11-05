@@ -24,7 +24,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 	return (
 		<Card
 			className={`overflow-hidden hover:shadow-lg transition-shadow duration-300 p-0 group ${
-				product.category === avail ? 'border-2 border-orange-400' : 'border'
+				product.category === avail ? 'border border-orange-400' : 'border'
 			}`}
 		>
 			<Link to="/product/$productId" params={{ productId: product.id }}>
@@ -113,8 +113,7 @@ export default function WishlistProduct({
 	const gridCols = isFilterVisible ? 'lg:grid-cols-4' : 'lg:grid-cols-4';
 
 	return (
-		<div className="container mx-auto p-6">
-			<h1 className="text-2xl font-bold mb-6">Katalog Produk</h1>
+		<div className="container mx-auto pt-6">
 			<div
 				className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${gridCols} gap-4 transition-all duration-300`}
 			>
