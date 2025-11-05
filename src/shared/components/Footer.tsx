@@ -17,7 +17,7 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className="w-full py-12 px-12">
+		<footer className="w-full p-12">
 			<div className="mx-auto">
 				{/* Newsletter Section */}
 				<div className="bg-primary-600 rounded-3xl p-8 md:p-12 mb-12">
