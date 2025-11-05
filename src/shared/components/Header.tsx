@@ -58,7 +58,7 @@ const Header = () => {
 						<Button variant={'ghost'}>Daftar</Button>
 					</Link>
 
-					<Link to="/">
+					<Link to="/profile">
 						<Button className="rounded-3xl px-10">Masuk</Button>
 					</Link>
 				</div>
