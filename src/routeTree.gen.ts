@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as UpsellingUmkmRouteImport } from './routes/upselling-umkm'
 import { Route as TourUmkmRouteImport } from './routes/tour-umkm'
 import { Route as TokoRouteImport } from './routes/toko'
+import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TokoIndexRouteImport } from './routes/toko/index'
@@ -35,6 +36,11 @@ const TourUmkmRoute = TourUmkmRouteImport.update({
 const TokoRoute = TokoRouteImport.update({
   id: '/toko',
   path: '/toko',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductRoute = ProductRouteImport.update({
@@ -86,6 +92,7 @@ const ProductProductIdRoute = ProductProductIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/product': typeof ProductRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
@@ -99,6 +106,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/profile': typeof ProfileRoute
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
   '/product/$productId': typeof ProductProductIdRoute
@@ -113,6 +121,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/product': typeof ProductRouteWithChildren
+  '/profile': typeof ProfileRoute
   '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/product'
+    | '/profile'
     | '/toko'
     | '/tour-umkm'
     | '/upselling-umkm'
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/profile'
     | '/tour-umkm'
     | '/upselling-umkm'
     | '/product/$productId'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/product'
+    | '/profile'
     | '/toko'
     | '/tour-umkm'
     | '/upselling-umkm'
@@ -170,6 +182,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ProductRoute: typeof ProductRouteWithChildren
+  ProfileRoute: typeof ProfileRoute
   TokoRoute: typeof TokoRouteWithChildren
   TourUmkmRoute: typeof TourUmkmRoute
   UpsellingUmkmRoute: typeof UpsellingUmkmRoute
@@ -196,6 +209,13 @@ declare module '@tanstack/react-router' {
       path: '/toko'
       fullPath: '/toko'
       preLoaderRoute: typeof TokoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/product': {
@@ -298,6 +318,7 @@ const TokoRouteWithChildren = TokoRoute._addFileChildren(TokoRouteChildren)
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ProductRoute: ProductRouteWithChildren,
+  ProfileRoute: ProfileRoute,
   TokoRoute: TokoRouteWithChildren,
   TourUmkmRoute: TourUmkmRoute,
   UpsellingUmkmRoute: UpsellingUmkmRoute,
