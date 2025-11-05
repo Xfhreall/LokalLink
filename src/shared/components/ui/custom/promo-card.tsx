@@ -1,6 +1,7 @@
 import { Image } from '@unpic/react';
 import { MapPin, Star } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 import { Badge } from '@/shared/components/ui/shadcn/badge';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import { Card } from '@/shared/components/ui/shadcn/card';
@@ -184,8 +185,7 @@ const DealCard: React.FC<DealCardProps> = ({ deal, onFavorite }) => {
 
 export default function DealsOfTheDay() {
 	const handleFavorite = (dealId: string) => {
-		console.log('Favorited deal:', dealId);
-		alert(`Added deal ${dealId} to favorites!`);
+		toast.success(`Added deal ${dealId} to favorites!`);
 	};
 
 	return (

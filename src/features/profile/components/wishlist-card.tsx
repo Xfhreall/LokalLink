@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Image } from '@unpic/react';
 import { BellDot, MapPin, Star } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import {
 	Card,
@@ -106,8 +107,7 @@ export default function WishlistProduct({
 	isFilterVisible = true,
 }: ProductGridProps) {
 	const handleFavorite = (productId: string) => {
-		console.log('Favorited product:', productId);
-		alert(`Added product ${productId} to favorites!`);
+		toast.info(`Deleted product ${productId} from favorites!`);
 	};
 
 	const gridCols = isFilterVisible ? 'lg:grid-cols-4' : 'lg:grid-cols-4';

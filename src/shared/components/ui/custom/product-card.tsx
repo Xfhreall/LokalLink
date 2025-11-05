@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Image } from '@unpic/react';
 import { BellDot, MapPin, Star } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import {
 	Card,
@@ -103,8 +104,7 @@ export default function ProductGrid({
 	isFilterVisible = true,
 }: ProductGridProps) {
 	const handleFavorite = (productId: string) => {
-		console.log('Favorited product:', productId);
-		alert(`Added product ${productId} to favorites!`);
+		toast.success(`Added product ${productId} to favorites!`);
 	};
 
 	const gridCols = isFilterVisible ? 'lg:grid-cols-5' : 'lg:grid-cols-6';
