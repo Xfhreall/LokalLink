@@ -7,10 +7,8 @@ import {
 	CardContent,
 	CardFooter,
 } from '@/shared/components/ui/shadcn/card';
-import { type Product, products } from '@/shared/data/products';
-
-export { products };
-export type { Product };
+import type { Product } from '@/shared/data/dtos/product.dto';
+import { products } from '@/shared/data/products';
 
 type ProductCardProps = {
 	product: Product;
