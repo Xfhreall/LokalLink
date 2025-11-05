@@ -51,7 +51,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 				</h3>
 				{product.location && (
 					<div className="flex items-center gap-1 text-xs text-gray-600">
-						<MapPin className="w-3 h-3 flex-shrink-0" />
+						<MapPin className="w-3 h-3 shrink-0" />
 						<span className="truncate">{product.seller}</span>
 					</div>
 				)}
