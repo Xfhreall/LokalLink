@@ -6,6 +6,7 @@ import {
 	Scripts,
 } from '@tanstack/react-router';
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools';
+import { Toaster } from 'sonner';
 import appCss from '@/shared/styles/styles.css?url';
 import { FilterProvider } from '../shared/context/filter-context';
 import TanStackQueryDevtools from '../shared/integrations/tanstack-query/devtools';
@@ -52,6 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				></link>
 			</head>
 			<body>
+				<Toaster />
 				<FilterProvider>
 					{children}
 					{isDevelopment && (
