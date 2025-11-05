@@ -53,7 +53,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				></link>
 			</head>
 			<body>
-				<Toaster />
+				<Toaster richColors={true} />
 				<FilterProvider>
 					{children}
 					{isDevelopment && (
