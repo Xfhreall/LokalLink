@@ -17,6 +17,7 @@ const pathNames: Record<string, string> = {
 	'/product/info': 'Info Produk',
 	'/product/cart': 'Keranjang',
 	'/toko': 'Toko',
+	'/profile': 'Profile',
 };
 
 const staticRouteSegments = new Set([
@@ -27,6 +28,7 @@ const staticRouteSegments = new Set([
 	'info',
 	'cart',
 	'toko',
+	'profile',
 ]);
 
 function isDynamicParam(segment: string): boolean {
