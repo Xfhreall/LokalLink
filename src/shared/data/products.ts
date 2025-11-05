@@ -1,72 +1,10 @@
-export type Product = {
-	id: string;
-	name: string;
-	category: string;
-	seller: string;
-	rating: number;
-	totalReviews: number;
-	price: string;
-	image: string;
-	location: string;
-	phone?: string;
-};
-
-export type ProductInfo = {
-	productId: string;
-	title: string;
-	description: string;
-	features: Array<{
-		title: string;
-		description: string;
-	}>;
-};
-
-export type Store = {
-	id: string;
-	name: string;
-	description: string;
-	address: string;
-	phone: string;
-	image: string;
-	rating: number;
-	totalReviews: number;
-	openingHours: string;
-	categories: string[];
-	info: {
-		fullDescription: string;
-		openedSince: string;
-		additionalInfo: {
-			title: string;
-			content: string;
-		};
-	};
-};
-
-export type Review = {
-	id: string;
-	productId: string;
-	userName: string;
-	userAvatar?: string;
-	rating: number;
-	timeAgo: string;
-	variant: string;
-	comment: string;
-	images?: string[];
-};
-
-export type RatingDistribution = {
-	productId: string;
-	averageRating: number;
-	totalReviews: number;
-	buyerSatisfaction: number;
-	distribution: {
-		5: number;
-		4: number;
-		3: number;
-		2: number;
-		1: number;
-	};
-};
+import type {
+	Product,
+	ProductInfo,
+	RatingDistribution,
+	Review,
+	Store,
+} from './dtos/product.dto';
 
 export const products: Product[] = [
 	{
