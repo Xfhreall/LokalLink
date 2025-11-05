@@ -49,6 +49,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 					<div className="flex items-center gap-1 text-xs text-gray-600">
 						<MapPin className="w-3 h-3" />
 						<span className="truncate">{product.seller}</span>
+						<span className="truncate">{product.seller}</span>
 					</div>
 				)}
 

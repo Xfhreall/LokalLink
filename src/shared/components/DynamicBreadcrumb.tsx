@@ -52,6 +52,9 @@ function getSegmentLabel(
 	if (previousPath === '/toko' && isDynamicParam(segment)) {
 		return 'Detail Toko';
 	}
+	if (previousPath === '/toko' && isDynamicParam(segment)) {
+		return 'Detail Toko';
+	}
 	if (currentIndex > 0) {
 		const prevSegment = pathSegments[currentIndex - 1];
 		const prevPrevPath = pathSegments.slice(0, currentIndex - 1).join('/');
