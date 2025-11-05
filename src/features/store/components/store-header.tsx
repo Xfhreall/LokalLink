@@ -1,7 +1,7 @@
 import { Image } from '@unpic/react';
 import { MapPin, Share2, Star } from 'lucide-react';
 import { Button } from '@/shared/components/ui/shadcn/button';
-import type { Store } from '@/shared/data/products';
+import type { Store } from '@/shared/data/dtos/product.dto';
 
 interface StoreHeaderProps {
 	store: Store;
