@@ -13,14 +13,16 @@ import {
 	AvatarImage,
 } from '@/shared/components/ui/shadcn/avatar';
 import { Button } from '@/shared/components/ui/shadcn/button';
-import {
-	Card,
-	CardContent,
-	CardHeader,
-	CardTitle,
-} from '@/shared/components/ui/shadcn/card';
+import { Card, CardContent } from '@/shared/components/ui/shadcn/card';
 import { Input } from '@/shared/components/ui/shadcn/input';
 import { Label } from '@/shared/components/ui/shadcn/label';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/shared/components/ui/shadcn/select';
 import type { UserProfile } from '@/shared/data/user';
 import { useUserProfile } from '../hooks/useUserProfile';
 
@@ -75,105 +77,204 @@ export const DataDiriTab = () => {
 	return (
 		<div className="space-y-6">
 			<Card className="border-0 shadow-none">
-				<CardContent className="space-x-14 flex">
-					<div className="flex items-center gap-6 flex-col">
-						<Avatar className="size-[255px]">
-							<AvatarImage src={displayData.avatar} alt={displayData.name} />
-							<AvatarFallback className="text-3xl bg-gray-200">
-								{initials}
-							</AvatarFallback>
-						</Avatar>
-						<Button
-							variant="outline"
-							className="rounded-full transition-colors duration-300 w-full border-green-600 text-green-600 hover:bg-green-50"
-						>
-							Pilih Foto
-						</Button>
-					</div>
+				<CardContent className="p-6">
+					<div className="flex items-start gap-8">
+						<div className="flex flex-col items-center gap-6 shrink-0">
+							<Avatar className="size-48">
+								<AvatarImage src={displayData.avatar} alt={displayData.name} />
+								<AvatarFallback className="text-2xl bg-gray-200">
+									{initials}
+								</AvatarFallback>
+							</Avatar>
+							<Button
+								variant="outline"
+								className="rounded-full w-full transition-colors duration-300 border-green-600 text-green-600 hover:bg-green-50"
+							>
+								Pilih Foto
+							</Button>
+						</div>
 
-					<div className="flex flex-col justify-center max-w-sm w-full gap-6">
-						<div className="flex items-center justify-between">
-							<div>
-								<CardTitle>Ubah Data Diri</CardTitle>
-							</div>
-							{!isEditing ? (
-								<Button onClick={handleEdit} variant="ghost" size="icon">
-									<Edit2 className="w-4 h-4" />
-								</Button>
-							) : (
-								<div className="flex gap-2">
-									<Button onClick={handleCancel} variant="outline" size="sm">
-										<X className="w-4 h-4 mr-2" />
-										Batal
-									</Button>
-									<Button
-										onClick={handleSave}
-										size="sm"
-										className="bg-green-600 hover:bg-green-700"
-									>
-										<Save className="w-4 h-4 mr-2" />
-										Simpan
-									</Button>
+						{/* Right side - Form */}
+						<div className="flex-1">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+								{/* Ubah Biodata Diri */}
+								<div className="space-y-6">
+									<h3 className="text-lg font-semibold">Ubah Biodata Diri</h3>
+									<div className="flex w-full items-center">
+										<Label
+											htmlFor={nameId}
+											className="text-sm text-muted-foreground w-40"
+										>
+											Nama
+										</Label>
+										{isEditing ? (
+											<Input
+												id={nameId}
+												value={displayData.name}
+												onChange={(e) => handleChange('name', e.target.value)}
+												placeholder="Masukkan nama lengkap"
+												className="w-full"
+											/>
+										) : (
+											<p className="text-sm font-medium">{displayData.name}</p>
+										)}
+									</div>{' '}
+									<div className="flex w-full items-center">
+										<Label className="text-sm text-muted-foreground w-40">
+											Tanggal Lahir
+										</Label>
+										{isEditing ? (
+											<Input
+												type="date"
+												value={displayData.birthDate || ''}
+												onChange={(e) =>
+													handleChange('birthDate', e.target.value)
+												}
+												className="w-full"
+											/>
+										) : displayData.birthDate ? (
+											<p className="text-sm font-medium">
+												{new Date(displayData.birthDate).toLocaleDateString(
+													'id-ID',
+													{
+														day: 'numeric',
+														month: 'long',
+														year: 'numeric',
+													},
+												)}
+											</p>
+										) : (
+											<Button
+												variant="link"
+												className="text-green-600 hover:text-green-700 p-0 h-auto font-medium"
+											>
+												Tambahkan sekarang
+											</Button>
+										)}
+									</div>
+									<div className="flex w-full items-center">
+										<Label className="text-sm text-muted-foreground w-40">
+											Jenis Kelamin
+										</Label>
+										{isEditing ? (
+											<Select
+												value={displayData.gender || ''}
+												onValueChange={(value) => handleChange('gender', value)}
+											>
+												<SelectTrigger className="w-full">
+													<SelectValue placeholder="Pilih jenis kelamin" />
+												</SelectTrigger>
+												<SelectContent>
+													<SelectItem value="Laki-laki">Laki-laki</SelectItem>
+													<SelectItem value="Perempuan">Perempuan</SelectItem>
+												</SelectContent>
+											</Select>
+										) : displayData.gender ? (
+											<p className="text-sm font-medium">
+												{displayData.gender}
+											</p>
+										) : (
+											<Button
+												variant="link"
+												className="text-green-600 hover:text-green-700 p-0 h-auto font-medium"
+											>
+												Tambahkan sekarang
+											</Button>
+										)}
+									</div>
 								</div>
-							)}
-						</div>
-						<div className="grid grid-cols-[120px_1fr] px-4 items-center gap-4">
-							<Label htmlFor={nameId} className="text-sm text-muted-foreground">
-								Nama
-							</Label>
-							{isEditing ? (
-								<Input
-									id={nameId}
-									value={displayData.name}
-									onChange={(e) => handleChange('name', e.target.value)}
-									placeholder="Masukkan nama lengkap"
-									className="max-w-md"
-								/>
-							) : (
-								<p className="text-sm font-medium">{displayData.name}</p>
-							)}
-						</div>
 
-						<div className="grid grid-cols-[120px_1fr] px-4 items-center gap-4">
-							<Label
-								htmlFor={emailId}
-								className="text-sm text-muted-foreground"
-							>
-								Email
-							</Label>
-							{isEditing ? (
-								<Input
-									id={emailId}
-									type="email"
-									value={displayData.email}
-									onChange={(e) => handleChange('email', e.target.value)}
-									placeholder="Masukkan email"
-									className="max-w-md"
-								/>
-							) : (
-								<p className="text-sm font-medium">{displayData.email}</p>
-							)}
-						</div>
+								{/* Ubah Kontak */}
+								<div className="space-y-6">
+									<div className="flex justify-between">
+										<h3 className="text-lg font-semibold">Ubah Kontak</h3>
+										<div className="flex items-center">
+											{!isEditing ? (
+												<button onClick={handleEdit} type="button">
+													<Edit2 className="size-4" />
+												</button>
+											) : (
+												<div className="flex gap-2">
+													<Button
+														onClick={handleCancel}
+														variant="outline"
+														size="sm"
+													>
+														<X className="size-4 mr-2" />
+														Batal
+													</Button>
+													<Button
+														onClick={handleSave}
+														size="sm"
+														className="bg-green-600 hover:bg-green-700"
+													>
+														<Save className="size-4 mr-2" />
+														Simpan
+													</Button>
+												</div>
+											)}
+										</div>
+									</div>
 
-						<div className="grid grid-cols-[120px_1fr] px-4 items-center gap-4">
-							<Label
-								htmlFor={phoneId}
-								className="text-sm text-muted-foreground"
-							>
-								No Telp
-							</Label>
-							{isEditing ? (
-								<Input
-									id={phoneId}
-									type="tel"
-									value={displayData.phone}
-									onChange={(e) => handleChange('phone', e.target.value)}
-									placeholder="Masukkan nomor telepon"
-									className="max-w-md"
-								/>
-							) : (
-								<p className="text-sm font-medium">{displayData.phone}</p>
-							)}
+									<div className="flex w-full items-center">
+										<Label className="text-sm text-muted-foreground w-40">
+											Nama
+										</Label>
+										{isEditing ? (
+											<Input
+												value={displayData.name}
+												onChange={(e) => handleChange('name', e.target.value)}
+												placeholder="Masukkan nama lengkap"
+												className="w-full"
+											/>
+										) : (
+											<p className="text-sm font-medium">{displayData.name}</p>
+										)}
+									</div>
+
+									<div className="flex w-full items-center">
+										<Label
+											htmlFor={emailId}
+											className="text-sm text-muted-foreground w-40"
+										>
+											Email
+										</Label>
+										{isEditing ? (
+											<Input
+												id={emailId}
+												type="email"
+												value={displayData.email}
+												onChange={(e) => handleChange('email', e.target.value)}
+												placeholder="Masukkan email"
+												className="w-full"
+											/>
+										) : (
+											<p className="text-sm font-medium">{displayData.email}</p>
+										)}
+									</div>
+
+									<div className="flex w-full items-center">
+										<Label
+											htmlFor={phoneId}
+											className="text-sm text-muted-foreground w-40"
+										>
+											No Telp
+										</Label>
+										{isEditing ? (
+											<Input
+												id={phoneId}
+												type="tel"
+												value={displayData.phone}
+												onChange={(e) => handleChange('phone', e.target.value)}
+												placeholder="Masukkan nomor telepon"
+												className="w-full"
+											/>
+										) : (
+											<p className="text-sm font-medium">{displayData.phone}</p>
+										)}
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</CardContent>
@@ -188,7 +289,7 @@ export const DataDiriTab = () => {
 							</div>
 							<div>
 								<h4 className="font-semibold mb-1">Buka Toko</h4>
-								<p className="text-sm text-muted-foreground">
+								<p className="text-sm text-muted-foreground w-40">
 									Jual Beli produk UMKM semuah itu! Tinggal daftarkan Usahamu di
 									LokalLink semuanya bisa pakai Link!
 								</p>
@@ -209,7 +310,7 @@ export const DataDiriTab = () => {
 							</div>
 							<div>
 								<h4 className="font-semibold mb-1">Buat Artikel</h4>
-								<p className="text-sm text-muted-foreground">
+								<p className="text-sm text-muted-foreground w-40">
 									Jual Beli produk UMKM semuah itu! Tinggal daftarkan Usahamu di
 									LokalLink semuanya bisa pakai Link!
 								</p>
