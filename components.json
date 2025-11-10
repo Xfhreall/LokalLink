@@ -10,12 +10,16 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@/shared/components",
     "utils": "@/shared/lib/utils",
     "ui": "@/shared/components/ui/shadcn",
+    "svgs": "@/shared/components/icons",
     "lib": "@/shared/lib",
     "hooks": "@/shared/hooks"
   },
-  "iconLibrary": "lucide"
+  "registries": {
+    "@svgl": "https://svgl.app/r/{name}.json"
+  }
 }
