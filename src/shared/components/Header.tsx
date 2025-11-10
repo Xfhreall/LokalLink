@@ -54,11 +54,11 @@ const Header = () => {
 					</li>
 				</ul>
 				<div className="flex items-center gap-2">
-					<Link to="/">
+					<Link to="/auth/singup">
 						<Button variant={'ghost'}>Daftar</Button>
 					</Link>
 
-					<Link to="/profile">
+					<Link to="/auth/signin">
 						<Button className="rounded-3xl px-10">Masuk</Button>
 					</Link>
 				</div>
