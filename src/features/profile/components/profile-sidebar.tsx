@@ -22,7 +22,7 @@ export const ProfileSidebar = () => {
 		.slice(0, 2);
 
 	return (
-		<Card className="border-primary pb-24">
+		<Card className="border-primary pb-24 sticky top-44">
 			<CardContent className="space-y-6">
 				<div className="flex items-center  gap-4 space-y-4">
 					<Avatar className="w-24 h-24">
