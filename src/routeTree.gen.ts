@@ -14,6 +14,7 @@ import { Route as TourUmkmRouteImport } from './routes/tour-umkm'
 import { Route as TokoRouteImport } from './routes/toko'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ProductRouteImport } from './routes/product'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as TokoIndexRouteImport } from './routes/toko/index'
 import { Route as ProductIndexRouteImport } from './routes/product/index'
@@ -22,6 +23,8 @@ import { Route as ProductReviewRouteImport } from './routes/product/review'
 import { Route as ProductInfoRouteImport } from './routes/product/info'
 import { Route as ProductCartRouteImport } from './routes/product/cart'
 import { Route as ProductProductIdRouteImport } from './routes/product/$productId'
+import { Route as AuthSingupRouteImport } from './routes/auth/singup'
+import { Route as AuthSigninRouteImport } from './routes/auth/signin'
 
 const UpsellingUmkmRoute = UpsellingUmkmRouteImport.update({
   id: '/upselling-umkm',
@@ -46,6 +49,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const ProductRoute = ProductRouteImport.update({
   id: '/product',
   path: '/product',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -88,14 +96,27 @@ const ProductProductIdRoute = ProductProductIdRouteImport.update({
   path: '/$productId',
   getParentRoute: () => ProductRoute,
 } as any)
+const AuthSingupRoute = AuthSingupRouteImport.update({
+  id: '/singup',
+  path: '/singup',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSigninRoute = AuthSigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => AuthRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteWithChildren
   '/product': typeof ProductRouteWithChildren
   '/profile': typeof ProfileRoute
   '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/singup': typeof AuthSingupRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
@@ -106,9 +127,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteWithChildren
   '/profile': typeof ProfileRoute
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/singup': typeof AuthSingupRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
@@ -120,11 +144,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRouteWithChildren
   '/product': typeof ProductRouteWithChildren
   '/profile': typeof ProfileRoute
   '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
   '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/singup': typeof AuthSingupRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
@@ -137,11 +164,14 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/product'
     | '/profile'
     | '/toko'
     | '/tour-umkm'
     | '/upselling-umkm'
+    | '/auth/signin'
+    | '/auth/singup'
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
@@ -152,9 +182,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/profile'
     | '/tour-umkm'
     | '/upselling-umkm'
+    | '/auth/signin'
+    | '/auth/singup'
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
@@ -165,11 +198,14 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/product'
     | '/profile'
     | '/toko'
     | '/tour-umkm'
     | '/upselling-umkm'
+    | '/auth/signin'
+    | '/auth/singup'
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
@@ -181,6 +217,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRouteWithChildren
   ProductRoute: typeof ProductRouteWithChildren
   ProfileRoute: typeof ProfileRoute
   TokoRoute: typeof TokoRouteWithChildren
@@ -223,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/product'
       fullPath: '/product'
       preLoaderRoute: typeof ProductRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -281,8 +325,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductProductIdRouteImport
       parentRoute: typeof ProductRoute
     }
+    '/auth/singup': {
+      id: '/auth/singup'
+      path: '/singup'
+      fullPath: '/auth/singup'
+      preLoaderRoute: typeof AuthSingupRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/signin': {
+      id: '/auth/signin'
+      path: '/signin'
+      fullPath: '/auth/signin'
+      preLoaderRoute: typeof AuthSigninRouteImport
+      parentRoute: typeof AuthRoute
+    }
   }
 }
+
+interface AuthRouteChildren {
+  AuthSigninRoute: typeof AuthSigninRoute
+  AuthSingupRoute: typeof AuthSingupRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthSigninRoute: AuthSigninRoute,
+  AuthSingupRoute: AuthSingupRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
 
 interface ProductRouteChildren {
   ProductProductIdRoute: typeof ProductProductIdRoute
@@ -317,6 +387,7 @@ const TokoRouteWithChildren = TokoRoute._addFileChildren(TokoRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRouteWithChildren,
   ProductRoute: ProductRouteWithChildren,
   ProfileRoute: ProfileRoute,
   TokoRoute: TokoRouteWithChildren,
