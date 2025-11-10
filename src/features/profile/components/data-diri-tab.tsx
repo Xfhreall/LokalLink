@@ -25,6 +25,7 @@ import {
 } from '@/shared/components/ui/shadcn/select';
 import type { UserProfile } from '@/shared/data/user';
 import { useUserProfile } from '../hooks/useUserProfile';
+import ActionCard from './action-card';
 
 export const DataDiriTab = () => {
 	const { profile, updateProfile, isLoading } = useUserProfile();
@@ -279,50 +280,7 @@ export const DataDiriTab = () => {
 					</div>
 				</CardContent>
 			</Card>
-
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-				<Card className="border-green-500 relative hover:shadow-md transition-shadow cursor-pointer">
-					<CardContent>
-						<div className="flex items-start gap-4">
-							<div className="p-3 bg-green-100 rounded-lg">
-								<ShoppingBag className="w-6 h-6 text-green-600" />
-							</div>
-							<div>
-								<h4 className="font-semibold mb-1">Buka Toko</h4>
-								<p className="text-sm text-muted-foreground w-40">
-									Jual Beli produk UMKM semuah itu! Tinggal daftarkan Usahamu di
-									LokalLink semuanya bisa pakai Link!
-								</p>
-							</div>
-						</div>
-					</CardContent>
-					<ChevronRight
-						className="absolute right-4 top-1/2 transform -translate-y-1/2"
-						size={32}
-					/>
-				</Card>
-
-				<Card className="border-green-500 relative hover:shadow-md transition-shadow cursor-pointer">
-					<CardContent>
-						<div className="flex items-start gap-4">
-							<div className="p-3 bg-green-100 rounded-lg">
-								<FileEdit className="w-6 h-6 text-green-600" />
-							</div>
-							<div>
-								<h4 className="font-semibold mb-1">Buat Artikel</h4>
-								<p className="text-sm text-muted-foreground w-40">
-									Jual Beli produk UMKM semuah itu! Tinggal daftarkan Usahamu di
-									LokalLink semuanya bisa pakai Link!
-								</p>
-							</div>
-						</div>
-					</CardContent>
-					<ChevronRight
-						className="absolute right-4 top-1/2 transform -translate-y-1/2"
-						size={32}
-					/>
-				</Card>
-			</div>
+			<ActionCard />
 		</div>
 	);
 };
