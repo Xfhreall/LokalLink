@@ -1,6 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { ProfileContainer } from '@/features/profile/containers/profile-container';
-import Footer from '@/shared/components/Footer';
 import Header from '@/shared/components/Header';
 
 export const Route = createFileRoute('/profile')({
@@ -12,7 +11,6 @@ function ProfilePage() {
 		<>
 			<Header />
 			<ProfileContainer />
-			<Footer />
 		</>
 	);
 }
