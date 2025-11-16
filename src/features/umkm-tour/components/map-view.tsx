@@ -21,15 +21,17 @@ export const MapView = ({
 	getCategoryColor,
 }: MapViewProps) => {
 	return (
-		<div className="flex-1 w-full h-full border border-primary relative overflow-hidden rounded-lg">
+		<div className="relative flex-1 w-full h-full overflow-hidden rounded-lg border border-border bg-background">
 			<div ref={mapRef} className="w-full h-full z-0" />
 
-			<img
-				src="/assets/maps.svg"
-				alt="Map"
-				loading="lazy"
-				className="absolute z-20 h-screen w-2xl pointer-events-none"
-			/>
+			{!mapRef.current && (
+				<div className="absolute inset-0 z-30 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+					<div className="flex flex-col items-center gap-3">
+						<div className="h-10 w-10 animate-spin rounded-full border-4 border-primary border-t-transparent" />
+						<p className="text-sm font-medium text-muted">Loading map...</p>
+					</div>
+				</div>
+			)}
 
 			{selectedPlace && (
 				<PlaceDetailPopup
