@@ -1,11 +1,4 @@
-import {
-	ChevronRight,
-	Edit2,
-	FileEdit,
-	Save,
-	ShoppingBag,
-	X,
-} from 'lucide-react';
+import { Edit2, Save, X } from 'lucide-react';
 import { useId, useState } from 'react';
 import {
 	Avatar,
@@ -78,33 +71,35 @@ export const DataDiriTab = () => {
 	return (
 		<div className="space-y-6">
 			<Card className="border-0 shadow-none">
-				<CardContent className="p-6">
-					<div className="flex items-start gap-8">
-						<div className="flex flex-col items-center gap-6 shrink-0">
-							<Avatar className="size-48">
+				<CardContent className="p-3 sm:p-6">
+					<div className="flex flex-col lg:flex-row items-start gap-6 lg:gap-8">
+						<div className="flex flex-col items-center gap-4 sm:gap-6 shrink-0 w-full lg:w-auto">
+							<Avatar className="size-32 sm:size-40 lg:size-48">
 								<AvatarImage src={displayData.avatar} alt={displayData.name} />
-								<AvatarFallback className="text-2xl bg-gray-200">
+								<AvatarFallback className="text-xl sm:text-2xl bg-gray-200">
 									{initials}
 								</AvatarFallback>
 							</Avatar>
 							<Button
 								variant="outline"
-								className="rounded-full w-full transition-colors duration-300 border-green-600 text-green-600 hover:bg-green-50"
+								className="rounded-full w-full max-w-xs lg:max-w-none transition-colors duration-300 border-green-600 text-green-600 hover:bg-green-50"
 							>
 								Pilih Foto
 							</Button>
 						</div>
 
 						{/* Right side - Form */}
-						<div className="flex-1">
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-8">
+						<div className="flex-1 w-full">
+							<div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 xl:gap-x-16 gap-y-6 sm:gap-y-8">
 								{/* Ubah Biodata Diri */}
-								<div className="space-y-6">
-									<h3 className="text-lg font-semibold">Ubah Biodata Diri</h3>
-									<div className="flex w-full items-center">
+								<div className="space-y-4 sm:space-y-6">
+									<h3 className="text-base sm:text-lg font-semibold">
+										Ubah Biodata Diri
+									</h3>
+									<div className="flex flex-col sm:flex-row w-full sm:items-center gap-2 sm:gap-4">
 										<Label
 											htmlFor={nameId}
-											className="text-sm text-muted-foreground w-40"
+											className="text-sm text-muted-foreground sm:w-32 lg:w-40 shrink-0"
 										>
 											Nama
 										</Label>
@@ -119,9 +114,9 @@ export const DataDiriTab = () => {
 										) : (
 											<p className="text-sm font-medium">{displayData.name}</p>
 										)}
-									</div>{' '}
-									<div className="flex w-full items-center">
-										<Label className="text-sm text-muted-foreground w-40">
+									</div>
+									<div className="flex flex-col sm:flex-row w-full sm:items-center gap-2 sm:gap-4">
+										<Label className="text-sm text-muted-foreground sm:w-32 lg:w-40 shrink-0">
 											Tanggal Lahir
 										</Label>
 										{isEditing ? (
@@ -153,8 +148,8 @@ export const DataDiriTab = () => {
 											</Button>
 										)}
 									</div>
-									<div className="flex w-full items-center">
-										<Label className="text-sm text-muted-foreground w-40">
+									<div className="flex flex-col sm:flex-row w-full sm:items-center gap-2 sm:gap-4">
+										<Label className="text-sm text-muted-foreground sm:w-32 lg:w-40 shrink-0">
 											Jenis Kelamin
 										</Label>
 										{isEditing ? (
@@ -177,7 +172,7 @@ export const DataDiriTab = () => {
 										) : (
 											<Button
 												variant="link"
-												className="text-green-600 hover:text-green-700 p-0 h-auto font-medium"
+												className="text-green-600 hover:text-green-700 p-0 h-auto font-medium text-left"
 											>
 												Tambahkan sekarang
 											</Button>
@@ -186,9 +181,11 @@ export const DataDiriTab = () => {
 								</div>
 
 								{/* Ubah Kontak */}
-								<div className="space-y-6">
-									<div className="flex justify-between">
-										<h3 className="text-lg font-semibold">Ubah Kontak</h3>
+								<div className="space-y-4 sm:space-y-6">
+									<div className="flex flex-row justify-between items-center gap-3">
+										<h3 className="text-base sm:text-lg font-semibold">
+											Ubah Kontak
+										</h3>
 										<div className="flex items-center">
 											{!isEditing ? (
 												<button onClick={handleEdit} type="button">
@@ -217,8 +214,8 @@ export const DataDiriTab = () => {
 										</div>
 									</div>
 
-									<div className="flex w-full items-center">
-										<Label className="text-sm text-muted-foreground w-40">
+									<div className="flex flex-col sm:flex-row w-full sm:items-center gap-2 sm:gap-4">
+										<Label className="text-sm text-muted-foreground sm:w-32 lg:w-40 shrink-0">
 											Nama
 										</Label>
 										{isEditing ? (
@@ -229,14 +226,16 @@ export const DataDiriTab = () => {
 												className="w-full"
 											/>
 										) : (
-											<p className="text-sm font-medium">{displayData.name}</p>
+											<p className="text-sm font-medium wrap-break-word">
+												{displayData.name}
+											</p>
 										)}
 									</div>
 
-									<div className="flex w-full items-center">
+									<div className="flex flex-col sm:flex-row w-full sm:items-center gap-2 sm:gap-4">
 										<Label
 											htmlFor={emailId}
-											className="text-sm text-muted-foreground w-40"
+											className="text-sm text-muted-foreground sm:w-32 lg:w-40 shrink-0"
 										>
 											Email
 										</Label>
@@ -250,14 +249,16 @@ export const DataDiriTab = () => {
 												className="w-full"
 											/>
 										) : (
-											<p className="text-sm font-medium">{displayData.email}</p>
+											<p className="text-sm font-medium break-all">
+												{displayData.email}
+											</p>
 										)}
 									</div>
 
-									<div className="flex w-full items-center">
+									<div className="flex flex-col sm:flex-row w-full sm:items-center gap-2 sm:gap-4">
 										<Label
 											htmlFor={phoneId}
-											className="text-sm text-muted-foreground w-40"
+											className="text-sm text-muted-foreground sm:w-32 lg:w-40 shrink-0"
 										>
 											No Telp
 										</Label>

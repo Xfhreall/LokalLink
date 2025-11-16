@@ -25,7 +25,7 @@ export const SigninForm = () => {
 			<div className="w-full max-w-md">
 				<div className="flex justify-center mb-8">
 					<Image
-						src="/icons/logo/locallink.svg"
+						src="/icons/logo/lokallink.png"
 						layout="fullWidth"
 						alt="LokalLink"
 						className="h-20"

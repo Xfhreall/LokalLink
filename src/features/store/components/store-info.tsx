@@ -1,4 +1,4 @@
-import type { Store } from '@/shared/data/products';
+import type { Store } from '@/shared/data/dtos/product.dto';
 
 interface StoreInfoProps {
 	store: Store;

@@ -1,8 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { Image } from '@unpic/react';
-import { Eye, EyeOff, Lock, Phone, User } from 'lucide-react';
+import { Eye, EyeOff, Lock, Mail, Phone, User } from 'lucide-react';
 import { useState } from 'react';
-import { Google } from '@/shared/components/icons/google';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import { Checkbox } from '@/shared/components/ui/shadcn/checkbox';
 import {
@@ -24,21 +23,41 @@ export const SignupForm = () => {
 	return (
 		<div className="w-full h-full flex flex-col items-center z-10 justify-center px-12">
 			<div className="w-full max-w-md">
-				<div className="flex justify-center mb-8">
+				<div className="flex justify-center mb-4">
 					<Image
-						src="/icons/logo/locallink.svg"
+						src="/icons/logo/lokallink.png"
 						layout="fullWidth"
 						alt="LokalLink"
 						className="h-20"
 					/>
 				</div>
 
-				<h1 className="text-3xl font-bold text-green-600 text-center mb-8">
+				<h1 className="text-3xl font-bold text-green-600 text-center mb-4">
 					Sign up
 				</h1>
 
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+						<FormField
+							control={form.control}
+							name="email"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Email</FormLabel>
+									<FormControl>
+										<div className="relative">
+											<Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+											<Input
+												{...field}
+												placeholder="Tulis Emailmu disini"
+												className="pl-12 rounded-xl border-gray-400 py-5"
+											/>
+										</div>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
 						<FormField
 							control={form.control}
 							name="fullName"
@@ -178,14 +197,6 @@ export const SignupForm = () => {
 							disabled={form.formState.isSubmitting}
 						>
 							{form.formState.isSubmitting ? 'Memuat...' : 'Daftar'}
-						</Button>
-						<Button
-							type="button"
-							variant="outline"
-							className="w-full border-2 py-5 rounded-xl border-primary"
-						>
-							<Google className="size-6" />
-							Continue with Google
 						</Button>
 						<p className="text-center text-sm">
 							Sudah punya akun?{' '}

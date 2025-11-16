@@ -17,7 +17,7 @@ const ads = [
 
 const Ads = () => {
 	return (
-		<div className="w-full grid grid-cols-3 gap-5 mt-16 container mx-auto">
+		<div className="w-full grid grid-cols-1 md:grid-cols-3 gap-5 mt-16 container mx-auto">
 			{ads.map((ad, index) => (
 				<div
 					className="col-span-1 bg-red-500 aspect-video"

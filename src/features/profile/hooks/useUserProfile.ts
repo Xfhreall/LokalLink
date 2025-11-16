@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import {
 	getUserProfile,
@@ -8,6 +9,17 @@ import {
 export const useUserProfile = () => {
 	const [profile, setProfile] = useState<UserProfile | null>(null);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isSet, setIsSet] = useState(false);
+	const nav = useNavigate();
+
+	useEffect(() => {}, []);
+
+	const handleClick = ({ onShowToko }: { onShowToko: () => void }) => {
+		if (isSet) {
+			return nav({ to: '/profile/penjual' });
+		}
+		return onShowToko();
+	};
 
 	useEffect(() => {
 		const loadProfile = () => {
@@ -15,6 +27,12 @@ export const useUserProfile = () => {
 			setProfile(userProfile);
 			setIsLoading(false);
 		};
+		if (typeof window !== 'undefined') {
+			const role = localStorage.getItem('role');
+			if (role === 'penjual') {
+				setIsSet(true);
+			}
+		}
 
 		loadProfile();
 	}, []);
@@ -31,5 +49,7 @@ export const useUserProfile = () => {
 		profile,
 		updateProfile,
 		isLoading,
+		isSet,
+		handleClick,
 	};
 };

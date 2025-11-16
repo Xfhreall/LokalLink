@@ -168,7 +168,7 @@ const DealCard: React.FC<DealCardProps> = ({ deal, onFavorite }) => {
 						<p className="font-bold text-base text-gray-900">{deal.price}</p>
 
 						<Button
-							className="text-white rounded-full px-6 bg-green-500 hover:bg-green-600 font-medium shadow-sm"
+							className="text-white rounded-full px-6 text-xs font-medium shadow-sm"
 							size="sm"
 							onClick={() => onFavorite?.(deal.id)}
 						>

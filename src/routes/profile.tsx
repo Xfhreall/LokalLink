@@ -1,16 +1,15 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { ProfileContainer } from '@/features/profile/containers/profile-container';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
 import Header from '@/shared/components/Header';
 
 export const Route = createFileRoute('/profile')({
-	component: ProfilePage,
+	component: RouteComponent,
 });
 
-function ProfilePage() {
+function RouteComponent() {
 	return (
 		<>
 			<Header />
-			<ProfileContainer />
+			<Outlet />
 		</>
 	);
 }

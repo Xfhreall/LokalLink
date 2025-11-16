@@ -1,6 +1,6 @@
 import { Star } from 'lucide-react';
 import { Progress } from '@/shared/components/ui/shadcn/progress';
-import type { RatingDistribution } from '@/shared/data/products';
+import type { RatingDistribution } from '@/shared/data/dtos/product.dto';
 
 interface RatingSummaryProps {
 	distribution: RatingDistribution;

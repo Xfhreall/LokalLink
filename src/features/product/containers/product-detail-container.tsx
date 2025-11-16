@@ -77,6 +77,11 @@ const ProductDetail = () => {
 						/>
 
 						<ProductPriceActions
+							productId={product.id}
+							productName={product.name}
+							productImage={product.image}
+							seller={product.seller}
+							location={product.location}
 							price={product.price}
 							quantity={quantity}
 							onIncrement={increment}

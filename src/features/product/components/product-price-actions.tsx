@@ -1,8 +1,14 @@
-import { Minus, Plus } from 'lucide-react';
+import { Link } from '@tanstack/react-router';
+import { Minus, Plus, ShoppingBag } from 'lucide-react';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import { Separator } from '@/shared/components/ui/shadcn/separator';
 
 interface ProductPriceActionsProps {
+	productId: string;
+	productName: string;
+	productImage: string;
+	seller: string;
+	location: string;
 	price: string;
 	quantity: number;
 	onIncrement: () => void;
@@ -13,6 +19,11 @@ interface ProductPriceActionsProps {
 }
 
 export function ProductPriceActions({
+	productId,
+	productName,
+	productImage,
+	seller,
+	location,
 	price,
 	quantity,
 	onIncrement,
@@ -25,8 +36,24 @@ export function ProductPriceActions({
 		const numericPrice = parseInt(price.replace(/[^0-9]/g, ''), 10);
 		return `Rp ${numericPrice * quantity}`;
 	}
+
+	// Prepare order data for checkout
+	const orderData = {
+		items: JSON.stringify([
+			{
+				id: `order-${productId}-${Date.now()}`,
+				productId,
+				productName,
+				productImage,
+				price,
+				quantity,
+				seller,
+				location,
+			},
+		]),
+	};
 	return (
-		<div className="space-y-4">
+		<div className="space-y-4 flex flex-col">
 			{/* Price */}
 			<div>
 				<p className="text-3xl font-bold text-primary">{price}</p>
@@ -78,7 +105,7 @@ export function ProductPriceActions({
 							className="flex-1 rounded-full"
 							onClick={onContact}
 						>
-							Hubungi Sekarang
+							Beli Sekarang
 						</Button>
 						<Button
 							size="lg"
@@ -94,6 +121,22 @@ export function ProductPriceActions({
 						Produk Belum Tersedia
 					</Button>
 				)}
+			</div>
+			{/* Checkout */}
+			<div className="flex items-center mt-12 gap-2 max-w-[350px] ml-auto rounded-2xl border-2 border-primary bg-primary/10 py-2 px-6">
+				<div className="text-lg flex gap-2 items-center font-bold text-primary">
+					<ShoppingBag className="inline-block size-5" />
+					<p className="text-sm text-amber-500">{totalPrice()}</p>
+				</div>
+				<Button
+					asChild
+					size="lg"
+					className="rounded-full bg-primary hover:bg-primary/90 px-10"
+				>
+					<Link to="/product/konfirmasi-pesanan" search={orderData}>
+						Checkout
+					</Link>
+				</Button>
 			</div>
 		</div>
 	);

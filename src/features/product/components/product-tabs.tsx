@@ -9,7 +9,7 @@ import type {
 	ProductInfo,
 	RatingDistribution,
 	Review,
-} from '@/shared/data/products';
+} from '@/shared/data/dtos/product.dto';
 import { RatingSummary } from './rating-summary';
 import { ReviewList } from './review-list';
 

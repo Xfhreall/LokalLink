@@ -17,7 +17,7 @@ const Footer = () => {
 	};
 
 	return (
-		<footer className="w-full p-12">
+		<footer className="w-full p-4 md:p-12">
 			<div className="mx-auto">
 				{/* Newsletter Section */}
 				<div className="bg-primary-600 rounded-3xl p-8 md:p-12 mb-12">
@@ -60,7 +60,7 @@ const Footer = () => {
 				</div>
 
 				{/* Footer Links */}
-				<div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 px-8">
+				<div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8 px-8 mx-auto text-center md:text-start">
 					<div>
 						<h3 className="font-semibold text-gray-900 mb-4">About us</h3>
 						<ul className="space-y-2">
@@ -105,7 +105,7 @@ const Footer = () => {
 						</ul>
 					</div>
 
-					<div className="col-span-2 md:col-span-2 flex justify-end">
+					<div className="col-span-2 md:col-span-2 flex justify-end mx-auto md:mx-0">
 						<div className="flex gap-3">
 							<Link
 								to="."

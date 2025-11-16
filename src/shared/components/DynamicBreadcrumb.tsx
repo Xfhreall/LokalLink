@@ -16,6 +16,7 @@ const pathNames: Record<string, string> = {
 	'/product/review': 'Review Produk',
 	'/product/info': 'Info Produk',
 	'/product/cart': 'Keranjang',
+	'/product/konfirmasi-pesanan': 'Konfirmasi Pesanan',
 	'/toko': 'Toko',
 	'/profile': 'Profile',
 };
@@ -27,6 +28,7 @@ const staticRouteSegments = new Set([
 	'review',
 	'info',
 	'cart',
+	'konfirmasi-pesanan',
 	'toko',
 	'profile',
 ]);

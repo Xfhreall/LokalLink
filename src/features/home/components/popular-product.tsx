@@ -5,11 +5,7 @@ interface PopularProductProps {
 }
 
 const PopularProduct = ({ isFilterVisible }: PopularProductProps) => {
-	return (
-		<div>
-			<ProductGrid isFilterVisible={isFilterVisible} />
-		</div>
-	);
+	return <ProductGrid isFilterVisible={isFilterVisible} />;
 };
 
 export default PopularProduct;

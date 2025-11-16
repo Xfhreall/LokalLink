@@ -17,7 +17,7 @@ const HomeContainer = () => {
 	return (
 		<div className="w-full relative">
 			<Header />
-			<main className="px-12 py-4 flex gap-4 relative w-full">
+			<main className="px-4 md:px-12 py-4 flex gap-4 relative w-full">
 				{/* filter  */}
 				<AnimatePresence mode="wait">
 					{isFilterVisible && (
@@ -50,7 +50,9 @@ const HomeContainer = () => {
 				>
 					<BannerHome />
 					<PopularProduct isFilterVisible={isFilterVisible} />
-					<PromoProduct />
+					<div className="hidden md:block">
+						<PromoProduct />
+					</div>
 					<Ads />
 				</motion.div>
 			</main>

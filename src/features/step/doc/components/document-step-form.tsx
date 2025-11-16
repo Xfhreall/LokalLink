@@ -57,7 +57,7 @@ export const DocumentStepForm = () => {
 	};
 
 	return (
-		<div className="min-h-screen bg-white relative overflow-hidden">
+		<div className="min-h-screen bg-white relative overflow-hidden px-4">
 			{/* Background Decoration */}
 			<div className="absolute -top-24 -left-24 size-96">
 				<img
@@ -112,7 +112,7 @@ export const DocumentStepForm = () => {
 
 				<div className="flex justify-center mb-8">
 					<img
-						src="/icons/logo/locallink.svg"
+						src="/icons/logo/lokallink.png"
 						alt="LokalLink"
 						className="h-12"
 					/>

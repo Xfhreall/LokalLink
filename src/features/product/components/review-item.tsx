@@ -1,7 +1,7 @@
 import { MoreVertical, Star } from 'lucide-react';
 import { Avatar, AvatarFallback } from '@/shared/components/ui/shadcn/avatar';
 import { Button } from '@/shared/components/ui/shadcn/button';
-import type { Review } from '@/shared/data/products';
+import type { Review } from '@/shared/data/dtos/product.dto';
 
 interface ReviewItemProps {
 	review: Review;

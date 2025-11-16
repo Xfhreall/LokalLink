@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/complexity/noUselessFragments: <explanation> */
 import { Image } from '@unpic/react';
 import { Edit2, MoreVertical, Star, Store, Trash2 } from 'lucide-react';
 import { useState } from 'react';
@@ -32,31 +31,33 @@ export const UlasanTab = () => {
 	};
 
 	return (
-		<div className="space-y-4 pt-6">
-			<div className="flex gap-3 mb-6 items-center">
-				<span className="text-sm font-medium mr-8">Filter</span>
-				<Button
-					variant={filter === 'unrated' ? 'default' : 'outline'}
-					size="sm"
-					onClick={() => setFilter('unrated')}
-					className="rounded-full"
-				>
-					Belum dinilai
-				</Button>
-				<Button
-					variant={filter === 'rated' ? 'default' : 'outline'}
-					size="sm"
-					onClick={() => setFilter('rated')}
-					className="rounded-full"
-				>
-					Sudah dinilai
-				</Button>
+		<div className="space-y-4 pt-4 sm:pt-6 px-3 sm:px-0">
+			<div className="flex flex-col sm:flex-row gap-3 mb-6 items-start sm:items-center">
+				<span className="text-sm font-medium sm:mr-8">Filter</span>
+				<div className="flex gap-2 sm:gap-3 flex-wrap">
+					<Button
+						variant={filter === 'unrated' ? 'default' : 'outline'}
+						size="sm"
+						onClick={() => setFilter('unrated')}
+						className="rounded-full text-xs sm:text-sm"
+					>
+						Belum dinilai
+					</Button>
+					<Button
+						variant={filter === 'rated' ? 'default' : 'outline'}
+						size="sm"
+						onClick={() => setFilter('rated')}
+						className="rounded-full text-xs sm:text-sm"
+					>
+						Sudah dinilai
+					</Button>
+				</div>
 			</div>
 
-			<div className="space-y-12 mt-8">
+			<div className="space-y-6 sm:space-y-8 lg:space-y-12 mt-6 sm:mt-8">
 				{/* Unrated Products List */}
 				{filter === 'unrated' && (
-					<>
+					<div>
 						{unratedProducts.length === 0 ? (
 							<div className="flex flex-col items-center justify-center py-16 text-center">
 								<div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
@@ -85,26 +86,26 @@ export const UlasanTab = () => {
 						) : (
 							unratedProducts.map((product) => (
 								<Card key={product.id} className="border-0 p-0 shadow-none">
-									<CardContent>
-										<div className="flex gap-4">
-											<div className="size-32 aspect-square h-auto shrink-0 rounded-lg overflow-hidden bg-gray-100">
+									<CardContent className="p-3 sm:p-6">
+										<div className="flex flex-col sm:flex-row gap-4">
+											<div className="w-full sm:w-24 md:w-32 aspect-square shrink-0 rounded-lg overflow-hidden bg-gray-100">
 												<Image
 													layout="fullWidth"
 													src={product.image}
 													alt={product.name}
-													className="w-full h-full"
+													className="w-full h-full object-cover"
 												/>
 											</div>
 
 											<div className="flex-1 min-w-0">
-												<div className="flex items-start justify-between mb-2">
-													<div className="flex-1">
-														<h3 className="font-semibold text-base mb-1">
+												<div className="flex items-start justify-between mb-2 gap-2">
+													<div className="flex-1 min-w-0">
+														<h3 className="font-semibold text-sm sm:text-base mb-1 line-clamp-2">
 															{product.name}
 														</h3>
-														<div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-															<Store className="w-4 h-4" />
-															<span>{product.seller}</span>
+														<div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground mb-2">
+															<Store className="w-3 h-3 sm:w-4 sm:h-4 shrink-0" />
+															<span className="truncate">{product.seller}</span>
 														</div>
 													</div>
 													{/* Dropdown actions */}
@@ -134,21 +135,23 @@ export const UlasanTab = () => {
 													</DropdownMenu>
 												</div>
 
-												<div className="flex items-center gap-1 mb-3">
-													{[1, 2, 3, 4, 5].map((star) => (
-														<Star
-															key={star}
-															className="w-5 h-5 text-gray-300 fill-gray-300"
-														/>
-													))}
-													<p className="text-sm ml-1 text-muted-foreground">
+												<div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 mb-3">
+													<div className="flex items-center gap-1">
+														{[1, 2, 3, 4, 5].map((star) => (
+															<Star
+																key={star}
+																className="w-4 h-4 sm:w-5 sm:h-5 text-gray-300 fill-gray-300"
+															/>
+														))}
+													</div>
+													<p className="text-xs sm:text-sm text-muted-foreground">
 														Nilai Produk ini sekarang
 													</p>
 												</div>
 
 												<Button
-													size={'lg'}
-													className="w-full max-w-2xs rounded-full"
+													size={'default'}
+													className="w-full sm:w-auto sm:max-w-xs rounded-full text-sm"
 												>
 													Nilai Sekarang
 												</Button>
@@ -158,12 +161,12 @@ export const UlasanTab = () => {
 								</Card>
 							))
 						)}
-					</>
+					</div>
 				)}
 
 				{/* Rated Reviews List */}
 				{filter === 'rated' && (
-					<>
+					<div>
 						{userReviews.length === 0 ? (
 							<div className="flex flex-col items-center justify-center py-16 text-center">
 								<div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
@@ -192,28 +195,30 @@ export const UlasanTab = () => {
 								const product = getProductInfo(review.productId);
 								return (
 									<Card key={review.id} className="border-0 p-0 shadow-none">
-										<CardContent>
-											<div className="flex gap-4">
-												<div className="size-32 shrink-0 rounded-lg overflow-hidden bg-gray-100">
+										<CardContent className="p-3 sm:p-6">
+											<div className="flex flex-col sm:flex-row gap-4">
+												<div className="w-full sm:size-24 md:size-32 aspect-square shrink-0 rounded-lg overflow-hidden bg-gray-100">
 													{product?.image && (
 														<Image
 															layout="fullWidth"
 															src={product.image}
 															alt={product.name}
-															className="w-full h-full object-cover"
+															className="h-full object-cover"
 														/>
 													)}
 												</div>
 
 												<div className="flex-1 min-w-0">
-													<div className="flex items-start justify-between mb-2">
-														<div className="flex-1">
-															<h3 className="font-semibold text-base mb-1">
+													<div className="flex items-start justify-between mb-2 gap-2">
+														<div className="flex-1 min-w-0">
+															<h3 className="font-semibold text-sm sm:text-base mb-1 line-clamp-2">
 																{product?.name || 'Produk'}
 															</h3>
-															<div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-																<Store className="w-4 h-4" />
-																<span>{product?.seller || 'Toko'}</span>
+															<div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground mb-2">
+																<Store className="w-3 h-3 sm:w-4 sm:h-4 shrink-0" />
+																<span className="truncate">
+																	{product?.seller || 'Toko'}
+																</span>
 															</div>
 														</div>
 														{/* action button */}
@@ -243,11 +248,11 @@ export const UlasanTab = () => {
 														</DropdownMenu>
 													</div>
 
-													<div className="flex items-center gap-1 mb-2">
+													<div className="flex flex-wrap items-center gap-1 mb-2">
 														{[1, 2, 3, 4, 5].map((star) => (
 															<Star
 																key={star}
-																className={`w-4 h-4 ${
+																className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${
 																	star <= review.rating
 																		? 'fill-yellow-400 text-yellow-400'
 																		: 'text-gray-300'
@@ -262,16 +267,16 @@ export const UlasanTab = () => {
 													<p className="text-xs text-muted-foreground mb-2">
 														{review.variant}
 													</p>
-													<p className="text-sm text-gray-700 leading-relaxed">
+													<p className="text-xs sm:text-sm text-gray-700 leading-relaxed">
 														{review.comment}
 													</p>
 
 													{review.images && review.images.length > 0 && (
-														<div className="flex gap-2 mt-3">
+														<div className="flex gap-2 mt-3 flex-wrap">
 															{review.images.map((image, index) => (
 																<div
 																	key={index.toString()}
-																	className="w-16 h-16 rounded-lg overflow-hidden bg-gray-100"
+																	className="w-14 h-14 sm:w-16 sm:h-16 rounded-lg overflow-hidden bg-gray-100"
 																>
 																	<Image
 																		layout="fullWidth"
@@ -290,7 +295,7 @@ export const UlasanTab = () => {
 								);
 							})
 						)}
-					</>
+					</div>
 				)}
 			</div>
 		</div>

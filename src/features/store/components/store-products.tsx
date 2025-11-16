@@ -8,7 +8,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/shared/components/ui/shadcn/select';
-import type { Product } from '@/shared/data/products';
+import type { Product } from '@/shared/data/dtos/product.dto';
 
 interface StoreProductsProps {
 	products: Product[];

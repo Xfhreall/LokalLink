@@ -17,15 +17,21 @@ import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as ProductRouteImport } from './routes/product'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as UpsellingUmkmIndexRouteImport } from './routes/upselling-umkm/index'
 import { Route as TokoIndexRouteImport } from './routes/toko/index'
 import { Route as StepIndexRouteImport } from './routes/step/index'
+import { Route as ProfileIndexRouteImport } from './routes/profile/index'
 import { Route as ProductIndexRouteImport } from './routes/product/index'
 import { Route as AuthIndexRouteImport } from './routes/auth/index'
+import { Route as UpsellingUmkmArticleIdRouteImport } from './routes/upselling-umkm/$articleId'
 import { Route as TokoStoreIdRouteImport } from './routes/toko/$storeId'
 import { Route as StepTelpRouteImport } from './routes/step/telp'
 import { Route as StepOtpRouteImport } from './routes/step/otp'
 import { Route as StepDocRouteImport } from './routes/step/doc'
+import { Route as ProfilePenjualRouteImport } from './routes/profile/penjual'
+import { Route as ProfilePembeliRouteImport } from './routes/profile/pembeli'
 import { Route as ProductReviewRouteImport } from './routes/product/review'
+import { Route as ProductKonfirmasiPesananRouteImport } from './routes/product/konfirmasi-pesanan'
 import { Route as ProductInfoRouteImport } from './routes/product/info'
 import { Route as ProductCartRouteImport } from './routes/product/cart'
 import { Route as ProductProductIdRouteImport } from './routes/product/$productId'
@@ -72,6 +78,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const UpsellingUmkmIndexRoute = UpsellingUmkmIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => UpsellingUmkmRoute,
+} as any)
 const TokoIndexRoute = TokoIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -82,6 +93,11 @@ const StepIndexRoute = StepIndexRouteImport.update({
   path: '/',
   getParentRoute: () => StepRoute,
 } as any)
+const ProfileIndexRoute = ProfileIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProfileRoute,
+} as any)
 const ProductIndexRoute = ProductIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -91,6 +107,11 @@ const AuthIndexRoute = AuthIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AuthRoute,
+} as any)
+const UpsellingUmkmArticleIdRoute = UpsellingUmkmArticleIdRouteImport.update({
+  id: '/$articleId',
+  path: '/$articleId',
+  getParentRoute: () => UpsellingUmkmRoute,
 } as any)
 const TokoStoreIdRoute = TokoStoreIdRouteImport.update({
   id: '/$storeId',
@@ -112,11 +133,27 @@ const StepDocRoute = StepDocRouteImport.update({
   path: '/doc',
   getParentRoute: () => StepRoute,
 } as any)
+const ProfilePenjualRoute = ProfilePenjualRouteImport.update({
+  id: '/penjual',
+  path: '/penjual',
+  getParentRoute: () => ProfileRoute,
+} as any)
+const ProfilePembeliRoute = ProfilePembeliRouteImport.update({
+  id: '/pembeli',
+  path: '/pembeli',
+  getParentRoute: () => ProfileRoute,
+} as any)
 const ProductReviewRoute = ProductReviewRouteImport.update({
   id: '/review',
   path: '/review',
   getParentRoute: () => ProductRoute,
 } as any)
+const ProductKonfirmasiPesananRoute =
+  ProductKonfirmasiPesananRouteImport.update({
+    id: '/konfirmasi-pesanan',
+    path: '/konfirmasi-pesanan',
+    getParentRoute: () => ProductRoute,
+  } as any)
 const ProductInfoRoute = ProductInfoRouteImport.update({
   id: '/info',
   path: '/info',
@@ -147,70 +184,86 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/product': typeof ProductRouteWithChildren
-  '/profile': typeof ProfileRoute
+  '/profile': typeof ProfileRouteWithChildren
   '/step': typeof StepRouteWithChildren
   '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
-  '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/upselling-umkm': typeof UpsellingUmkmRouteWithChildren
   '/auth/signin': typeof AuthSigninRoute
   '/auth/singup': typeof AuthSingupRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
+  '/product/konfirmasi-pesanan': typeof ProductKonfirmasiPesananRoute
   '/product/review': typeof ProductReviewRoute
+  '/profile/pembeli': typeof ProfilePembeliRoute
+  '/profile/penjual': typeof ProfilePenjualRoute
   '/step/doc': typeof StepDocRoute
   '/step/otp': typeof StepOtpRoute
   '/step/telp': typeof StepTelpRoute
   '/toko/$storeId': typeof TokoStoreIdRoute
+  '/upselling-umkm/$articleId': typeof UpsellingUmkmArticleIdRoute
   '/auth/': typeof AuthIndexRoute
   '/product/': typeof ProductIndexRoute
+  '/profile/': typeof ProfileIndexRoute
   '/step/': typeof StepIndexRoute
   '/toko/': typeof TokoIndexRoute
+  '/upselling-umkm/': typeof UpsellingUmkmIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/profile': typeof ProfileRoute
   '/tour-umkm': typeof TourUmkmRoute
-  '/upselling-umkm': typeof UpsellingUmkmRoute
   '/auth/signin': typeof AuthSigninRoute
   '/auth/singup': typeof AuthSingupRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
+  '/product/konfirmasi-pesanan': typeof ProductKonfirmasiPesananRoute
   '/product/review': typeof ProductReviewRoute
+  '/profile/pembeli': typeof ProfilePembeliRoute
+  '/profile/penjual': typeof ProfilePenjualRoute
   '/step/doc': typeof StepDocRoute
   '/step/otp': typeof StepOtpRoute
   '/step/telp': typeof StepTelpRoute
   '/toko/$storeId': typeof TokoStoreIdRoute
+  '/upselling-umkm/$articleId': typeof UpsellingUmkmArticleIdRoute
   '/auth': typeof AuthIndexRoute
   '/product': typeof ProductIndexRoute
+  '/profile': typeof ProfileIndexRoute
   '/step': typeof StepIndexRoute
   '/toko': typeof TokoIndexRoute
+  '/upselling-umkm': typeof UpsellingUmkmIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/auth': typeof AuthRouteWithChildren
   '/product': typeof ProductRouteWithChildren
-  '/profile': typeof ProfileRoute
+  '/profile': typeof ProfileRouteWithChildren
   '/step': typeof StepRouteWithChildren
   '/toko': typeof TokoRouteWithChildren
   '/tour-umkm': typeof TourUmkmRoute
-  '/upselling-umkm': typeof UpsellingUmkmRoute
+  '/upselling-umkm': typeof UpsellingUmkmRouteWithChildren
   '/auth/signin': typeof AuthSigninRoute
   '/auth/singup': typeof AuthSingupRoute
   '/product/$productId': typeof ProductProductIdRoute
   '/product/cart': typeof ProductCartRoute
   '/product/info': typeof ProductInfoRoute
+  '/product/konfirmasi-pesanan': typeof ProductKonfirmasiPesananRoute
   '/product/review': typeof ProductReviewRoute
+  '/profile/pembeli': typeof ProfilePembeliRoute
+  '/profile/penjual': typeof ProfilePenjualRoute
   '/step/doc': typeof StepDocRoute
   '/step/otp': typeof StepOtpRoute
   '/step/telp': typeof StepTelpRoute
   '/toko/$storeId': typeof TokoStoreIdRoute
+  '/upselling-umkm/$articleId': typeof UpsellingUmkmArticleIdRoute
   '/auth/': typeof AuthIndexRoute
   '/product/': typeof ProductIndexRoute
+  '/profile/': typeof ProfileIndexRoute
   '/step/': typeof StepIndexRoute
   '/toko/': typeof TokoIndexRoute
+  '/upselling-umkm/': typeof UpsellingUmkmIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -228,35 +281,45 @@ export interface FileRouteTypes {
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
+    | '/product/konfirmasi-pesanan'
     | '/product/review'
+    | '/profile/pembeli'
+    | '/profile/penjual'
     | '/step/doc'
     | '/step/otp'
     | '/step/telp'
     | '/toko/$storeId'
+    | '/upselling-umkm/$articleId'
     | '/auth/'
     | '/product/'
+    | '/profile/'
     | '/step/'
     | '/toko/'
+    | '/upselling-umkm/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/profile'
     | '/tour-umkm'
-    | '/upselling-umkm'
     | '/auth/signin'
     | '/auth/singup'
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
+    | '/product/konfirmasi-pesanan'
     | '/product/review'
+    | '/profile/pembeli'
+    | '/profile/penjual'
     | '/step/doc'
     | '/step/otp'
     | '/step/telp'
     | '/toko/$storeId'
+    | '/upselling-umkm/$articleId'
     | '/auth'
     | '/product'
+    | '/profile'
     | '/step'
     | '/toko'
+    | '/upselling-umkm'
   id:
     | '__root__'
     | '/'
@@ -272,26 +335,32 @@ export interface FileRouteTypes {
     | '/product/$productId'
     | '/product/cart'
     | '/product/info'
+    | '/product/konfirmasi-pesanan'
     | '/product/review'
+    | '/profile/pembeli'
+    | '/profile/penjual'
     | '/step/doc'
     | '/step/otp'
     | '/step/telp'
     | '/toko/$storeId'
+    | '/upselling-umkm/$articleId'
     | '/auth/'
     | '/product/'
+    | '/profile/'
     | '/step/'
     | '/toko/'
+    | '/upselling-umkm/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRoute: typeof AuthRouteWithChildren
   ProductRoute: typeof ProductRouteWithChildren
-  ProfileRoute: typeof ProfileRoute
+  ProfileRoute: typeof ProfileRouteWithChildren
   StepRoute: typeof StepRouteWithChildren
   TokoRoute: typeof TokoRouteWithChildren
   TourUmkmRoute: typeof TourUmkmRoute
-  UpsellingUmkmRoute: typeof UpsellingUmkmRoute
+  UpsellingUmkmRoute: typeof UpsellingUmkmRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -352,6 +421,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/upselling-umkm/': {
+      id: '/upselling-umkm/'
+      path: '/'
+      fullPath: '/upselling-umkm/'
+      preLoaderRoute: typeof UpsellingUmkmIndexRouteImport
+      parentRoute: typeof UpsellingUmkmRoute
+    }
     '/toko/': {
       id: '/toko/'
       path: '/'
@@ -366,6 +442,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StepIndexRouteImport
       parentRoute: typeof StepRoute
     }
+    '/profile/': {
+      id: '/profile/'
+      path: '/'
+      fullPath: '/profile/'
+      preLoaderRoute: typeof ProfileIndexRouteImport
+      parentRoute: typeof ProfileRoute
+    }
     '/product/': {
       id: '/product/'
       path: '/'
@@ -379,6 +462,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/auth/'
       preLoaderRoute: typeof AuthIndexRouteImport
       parentRoute: typeof AuthRoute
+    }
+    '/upselling-umkm/$articleId': {
+      id: '/upselling-umkm/$articleId'
+      path: '/$articleId'
+      fullPath: '/upselling-umkm/$articleId'
+      preLoaderRoute: typeof UpsellingUmkmArticleIdRouteImport
+      parentRoute: typeof UpsellingUmkmRoute
     }
     '/toko/$storeId': {
       id: '/toko/$storeId'
@@ -408,11 +498,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StepDocRouteImport
       parentRoute: typeof StepRoute
     }
+    '/profile/penjual': {
+      id: '/profile/penjual'
+      path: '/penjual'
+      fullPath: '/profile/penjual'
+      preLoaderRoute: typeof ProfilePenjualRouteImport
+      parentRoute: typeof ProfileRoute
+    }
+    '/profile/pembeli': {
+      id: '/profile/pembeli'
+      path: '/pembeli'
+      fullPath: '/profile/pembeli'
+      preLoaderRoute: typeof ProfilePembeliRouteImport
+      parentRoute: typeof ProfileRoute
+    }
     '/product/review': {
       id: '/product/review'
       path: '/review'
       fullPath: '/product/review'
       preLoaderRoute: typeof ProductReviewRouteImport
+      parentRoute: typeof ProductRoute
+    }
+    '/product/konfirmasi-pesanan': {
+      id: '/product/konfirmasi-pesanan'
+      path: '/konfirmasi-pesanan'
+      fullPath: '/product/konfirmasi-pesanan'
+      preLoaderRoute: typeof ProductKonfirmasiPesananRouteImport
       parentRoute: typeof ProductRoute
     }
     '/product/info': {
@@ -471,6 +582,7 @@ interface ProductRouteChildren {
   ProductProductIdRoute: typeof ProductProductIdRoute
   ProductCartRoute: typeof ProductCartRoute
   ProductInfoRoute: typeof ProductInfoRoute
+  ProductKonfirmasiPesananRoute: typeof ProductKonfirmasiPesananRoute
   ProductReviewRoute: typeof ProductReviewRoute
   ProductIndexRoute: typeof ProductIndexRoute
 }
@@ -479,12 +591,28 @@ const ProductRouteChildren: ProductRouteChildren = {
   ProductProductIdRoute: ProductProductIdRoute,
   ProductCartRoute: ProductCartRoute,
   ProductInfoRoute: ProductInfoRoute,
+  ProductKonfirmasiPesananRoute: ProductKonfirmasiPesananRoute,
   ProductReviewRoute: ProductReviewRoute,
   ProductIndexRoute: ProductIndexRoute,
 }
 
 const ProductRouteWithChildren =
   ProductRoute._addFileChildren(ProductRouteChildren)
+
+interface ProfileRouteChildren {
+  ProfilePembeliRoute: typeof ProfilePembeliRoute
+  ProfilePenjualRoute: typeof ProfilePenjualRoute
+  ProfileIndexRoute: typeof ProfileIndexRoute
+}
+
+const ProfileRouteChildren: ProfileRouteChildren = {
+  ProfilePembeliRoute: ProfilePembeliRoute,
+  ProfilePenjualRoute: ProfilePenjualRoute,
+  ProfileIndexRoute: ProfileIndexRoute,
+}
+
+const ProfileRouteWithChildren =
+  ProfileRoute._addFileChildren(ProfileRouteChildren)
 
 interface StepRouteChildren {
   StepDocRoute: typeof StepDocRoute
@@ -514,15 +642,29 @@ const TokoRouteChildren: TokoRouteChildren = {
 
 const TokoRouteWithChildren = TokoRoute._addFileChildren(TokoRouteChildren)
 
+interface UpsellingUmkmRouteChildren {
+  UpsellingUmkmArticleIdRoute: typeof UpsellingUmkmArticleIdRoute
+  UpsellingUmkmIndexRoute: typeof UpsellingUmkmIndexRoute
+}
+
+const UpsellingUmkmRouteChildren: UpsellingUmkmRouteChildren = {
+  UpsellingUmkmArticleIdRoute: UpsellingUmkmArticleIdRoute,
+  UpsellingUmkmIndexRoute: UpsellingUmkmIndexRoute,
+}
+
+const UpsellingUmkmRouteWithChildren = UpsellingUmkmRoute._addFileChildren(
+  UpsellingUmkmRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRoute: AuthRouteWithChildren,
   ProductRoute: ProductRouteWithChildren,
-  ProfileRoute: ProfileRoute,
+  ProfileRoute: ProfileRouteWithChildren,
   StepRoute: StepRouteWithChildren,
   TokoRoute: TokoRouteWithChildren,
   TourUmkmRoute: TourUmkmRoute,
-  UpsellingUmkmRoute: UpsellingUmkmRoute,
+  UpsellingUmkmRoute: UpsellingUmkmRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

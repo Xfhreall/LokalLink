@@ -36,7 +36,6 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 			},
 		],
 	}),
-
 	shellComponent: RootDocument,
 });
 
@@ -55,7 +54,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<body>
 				<Toaster richColors={true} />
 				<FilterProvider>
-					{children}
+					<main className="[view-transition-name:main-content] min-h-screen bg-background">
+						{children}
+					</main>
 					{isDevelopment && (
 						<TanStackDevtools
 							config={{

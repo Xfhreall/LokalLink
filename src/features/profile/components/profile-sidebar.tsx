@@ -1,3 +1,4 @@
+import { Store } from 'lucide-react';
 import {
 	Avatar,
 	AvatarFallback,
@@ -5,11 +6,15 @@ import {
 } from '@/shared/components/ui/shadcn/avatar';
 import { Button } from '@/shared/components/ui/shadcn/button';
 import { Card, CardContent } from '@/shared/components/ui/shadcn/card';
+import { Separator } from '@/shared/components/ui/shadcn/separator';
 import { useUserProfile } from '../hooks/useUserProfile';
 
-export const ProfileSidebar = () => {
-	const { profile, isLoading } = useUserProfile();
+interface ProfileSidebarProps {
+	onShowToko: () => void;
+}
 
+export const ProfileSidebar = ({ onShowToko }: ProfileSidebarProps) => {
+	const { profile, isLoading, isSet, handleClick } = useUserProfile();
 	if (isLoading || !profile) {
 		return null;
 	}
@@ -22,8 +27,8 @@ export const ProfileSidebar = () => {
 		.slice(0, 2);
 
 	return (
-		<Card className="border-primary pb-24 sticky top-44">
-			<CardContent className="space-y-6">
+		<Card className="border-primary pb-6 lg:pb-24 lg:sticky lg:top-44">
+			<CardContent className="space-y-4 lg:space-y-6">
 				<div className="flex items-center  gap-4 space-y-4">
 					<Avatar className="w-24 h-24">
 						<AvatarImage src={profile.avatar} alt={profile.name} />
@@ -36,7 +41,22 @@ export const ProfileSidebar = () => {
 						<Button className="mt-3 rounded-full px-6">Lengkapi data</Button>
 					</div>
 				</div>
-
+				<Separator className="bg-primary" />
+				<Card className="shadow-none bg-primary-100">
+					<CardContent className="gap-4 flex items-center">
+						<Store className="size-8" />
+						<div className="space-y-2">
+							<h4 className="font-semibold text-sm">Huang Xuxi</h4>
+							<Button
+								size={'sm'}
+								className="text-xs px-6 rounded-full"
+								onClick={() => handleClick({ onShowToko })}
+							>
+								{isSet ? 'Kelola Toko' : 'Lengkapi data'}
+							</Button>
+						</div>
+					</CardContent>
+				</Card>
 				<Card className="border-primary shadow-none">
 					<CardContent className="space-y-2">
 						<h4 className="font-semibold text-sm">

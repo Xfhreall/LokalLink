@@ -79,10 +79,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
 				{product.category === avail ? (
 					<Button
-						className="text-white rounded-full text-xs px-5"
+						className="text-white rounded-full text-xs px-7"
+						size="sm"
 						onClick={() => onFavorite?.(product.id)}
 					>
-						Favorit
+						Beli
 					</Button>
 				) : (
 					<Button
@@ -111,11 +112,11 @@ export default function ProductGrid({
 	const gridCols = isFilterVisible ? 'lg:grid-cols-5' : 'lg:grid-cols-6';
 
 	return (
-		<div className="container mx-auto p-6">
+		<div className="container mx-auto px-0 py-6 md:px-6">
 			<h1 className="text-2xl font-bold mb-6">Katalog Produk</h1>
 
 			<div
-				className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ${gridCols} gap-4 transition-all duration-300`}
+				className={`grid grid-cols-2 md:grid-cols-3 ${gridCols} gap-4 transition-all duration-300`}
 			>
 				{products.map((product) => (
 					<ProductCard

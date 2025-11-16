@@ -28,28 +28,41 @@ const category = [
 
 const RateCategory = () => {
 	return (
-		<Card className="max-w-3xs px-5 border-primary">
-			<CardTitle className="font-semibold text-lg pb-2 border-b-2">
+		<Card className="w-full sm:max-w-sm lg:max-w-xs xl:max-w-3xs px-4 sm:px-5 border-primary shadow-md hover:shadow-lg transition-shadow duration-300">
+			<CardTitle className="font-semibold text-base sm:text-lg pb-2 sm:pb-3 border-b-2 border-primary/20">
 				Kategori
 			</CardTitle>
-			<CardContent className="p-0 space-y-5">
-				<h3 className="font-medium">Semua</h3>
-				<div className="space-y-5">
+			<CardContent className="p-0 pt-4 space-y-4 sm:space-y-5">
+				<h3 className="font-medium text-sm sm:text-base text-gray-700">
+					Semua
+				</h3>
+				<div className="space-y-3 sm:space-y-4">
 					{category.map((item, index) => (
 						<div
 							key={index.toString()}
-							className="flex items-center justify-between"
+							className="flex items-center justify-between group hover:bg-primary/5 p-2 rounded-lg transition-colors duration-200 cursor-pointer"
 						>
-							<Label htmlFor={item.title} className="flex items-center gap-1">
-								<Image
-									src={item.image}
-									alt={item.title}
-									width={32}
-									height={32}
-								/>
-								<span className="capitalize font-normal">{item.title}</span>
+							<Label
+								htmlFor={item.title}
+								className="flex items-center gap-2 cursor-pointer flex-1"
+							>
+								<div className="shrink-0 w-7 h-7 sm:w-8 sm:h-8 flex items-center justify-center bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+									<Image
+										src={item.image}
+										alt={item.title}
+										width={20}
+										height={20}
+										className="w-5 h-5 sm:w-6 sm:h-6"
+									/>
+								</div>
+								<span className="capitalize font-normal text-sm sm:text-base text-gray-700 group-hover:text-primary transition-colors">
+									{item.title}
+								</span>
 							</Label>
-							<Checkbox className="border-primary" id={item.title} />
+							<Checkbox
+								className="border-primary data-[state=checked]:bg-primary data-[state=checked]:border-primary"
+								id={item.title}
+							/>
 						</div>
 					))}
 				</div>

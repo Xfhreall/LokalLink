@@ -2,6 +2,7 @@ import { z } from 'zod';
 
 export const signupSchema = z
 	.object({
+		email: z.string().email('Email tidak valid'),
 		fullName: z.string().min(1, 'Nama lengkap harus diisi'),
 		whatsapp: z
 			.string()

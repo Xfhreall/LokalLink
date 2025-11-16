@@ -7,7 +7,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/shared/components/ui/shadcn/select';
-import type { Review } from '@/shared/data/products';
+import type { Review } from '@/shared/data/dtos/product.dto';
 import { ReviewItem } from './review-item';
 
 interface ReviewListProps {

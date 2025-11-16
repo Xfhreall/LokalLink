@@ -19,10 +19,8 @@ export const useSigninForm = () => {
 
 	const onSubmit = async (data: SigninFormData) => {
 		await new Promise((resolve) => setTimeout(resolve, 1000));
-		if (
-			data.email === 'lokallink@lokallink.com' &&
-			data.password === '123123123'
-		) {
+		if (data.email === 'lokallink@gmail.com' && data.password === '123123123') {
+			localStorage.setItem('role', 'pembeli');
 			toast.success('Signin successful!');
 			return navigate({ to: '/profile' });
 		}
