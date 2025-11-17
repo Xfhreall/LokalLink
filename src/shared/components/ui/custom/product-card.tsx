@@ -70,16 +70,18 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 				</div>
 			</CardContent>
 
-			<CardFooter className="p-4 pt-0 flex mt-2 justify-between items-center">
+			<CardFooter
+				className={`p-4 pt-0 flex mt-2 items-center gap-2 ${product.category === avail ? 'flex-col md:flex-row justify-start md:justify-between' : 'text-gray-400 justify-between flex items-center'}`}
+			>
 				<p
-					className={`font-bold text-sm ${product.category === avail ? 'text-primary' : 'text-gray-400'}`}
+					className={`font-bold text-sm ${product.category === avail ? 'text-primary self-start md:self-center' : 'text-gray-400'}`}
 				>
 					{product.price}
 				</p>
 
 				{product.category === avail ? (
 					<Button
-						className="text-white rounded-full text-xs px-7"
+						className="text-white rounded-full w-full md:w-fit text-xs px-7"
 						size="sm"
 						onClick={() => onFavorite?.(product.id)}
 					>
@@ -88,7 +90,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 				) : (
 					<Button
 						size={'icon'}
-						className="rounded-full text-primary hover:text-white transition-colors duration-300 bg-primary-100 hover:bg-primary-400"
+						className="rounded-full  text-primary hover:text-white transition-colors duration-300 bg-primary-100 hover:bg-primary-400"
 					>
 						<BellDot />
 					</Button>
