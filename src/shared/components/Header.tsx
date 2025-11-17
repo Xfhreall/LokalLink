@@ -43,6 +43,7 @@ const Header = () => {
 						<Image
 							src="/icons/logo/lokallink.png"
 							alt="LokalLink Logo"
+							loading="lazy"
 							className="h-10 sm:h-12 lg:h-14 w-auto"
 							layout="fullWidth"
 						/>
