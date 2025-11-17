@@ -21,7 +21,6 @@ const ProductDetail = () => {
 	const product = products.find((p) => p.id === productId);
 	const { quantity, increment, decrement } = useProductQuantity();
 
-	// Get reviews, rating distribution, and product info for this product
 	const productReviews = reviews.filter((r) => r.productId === productId);
 	const ratingDistribution = ratingDistributions.find(
 		(rd) => rd.productId === productId,
@@ -31,7 +30,7 @@ const ProductDetail = () => {
 	if (!product) {
 		return (
 			<div className="w-full min-h-screen">
-				<main className="px-12 py-8">
+				<main className="px-4 md:px-12 py-8">
 					<div className="text-center">
 						<h1 className="text-2xl font-bold mb-4">Produk tidak ditemukan</h1>
 						<p className="text-gray-600">
@@ -62,7 +61,7 @@ const ProductDetail = () => {
 
 	return (
 		<div className="w-full min-h-screen">
-			<main className="px-12 py-8 container mx-auto">
+			<main className="px-4 md:px-12 py-8 container mx-auto">
 				<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
 					<ProductImage src={product.image} alt={product.name} />
 
